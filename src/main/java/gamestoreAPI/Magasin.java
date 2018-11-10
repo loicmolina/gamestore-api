@@ -4,14 +4,18 @@ import java.util.ArrayList;
 
 public class Magasin {
 	private ArrayList<Jeu> jeux;
+	private static H2DataBase database = new H2DataBase();
 	
-	public Magasin(){
+	public Magasin() throws Exception{
 		jeux = new ArrayList<Jeu>();
+		database.createDataBase();
+		jeux = database.getValues();
 	}
 	
-	public boolean addJeu(Jeu jeu){
+	public boolean addJeu(Jeu jeu) throws Exception{
 		if (jeu.getId() > 0 && !getJeuParId(jeu.getId()).contains(jeu)){
 			jeux.add(jeu);
+			database.insertValue(jeu);
 			return true;
 		}		
 		return false;
@@ -37,10 +41,11 @@ public class Magasin {
 		return jeux.contains(jeu);
 	}
 
-	public boolean deleteJeu(long id) {
+	public boolean deleteJeu(long id) throws Exception {
 		ArrayList<Jeu> jeuxTrouves = this.getJeuParId(id);
 		if (jeuxTrouves.size() > 0){
 			jeux.remove(jeuxTrouves.get(0));
+			database.deleteValue(jeuxTrouves.get(0));
 			return true;
 		}		
 		return false;

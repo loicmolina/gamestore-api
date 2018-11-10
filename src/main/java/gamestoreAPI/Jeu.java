@@ -7,7 +7,6 @@ public class Jeu {
 	private long id;
 	private String nom;
 	private String dateSortie;
-	private String lienImage;
 	private String developpeur;
 	private String genre1;
 	private String genre2;
@@ -41,14 +40,6 @@ public class Jeu {
 	
 	public void setDateSortie(String dateSortie) {
 		this.dateSortie = dateSortie;
-	}
-	
-	public String getLienImage() {
-		return lienImage;
-	}
-	
-	public void setLienImage(String lienImage) {
-		this.lienImage = lienImage;
 	}
 	
 	public String getDeveloppeur() {
