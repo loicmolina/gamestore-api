@@ -21,12 +21,6 @@ public class Magasin {
 		return false;
 	}	
 	
-	public ArrayList<Jeu> getJeuParNom(String nom){
-		ArrayList<Jeu> jeuxTrouves = new ArrayList<>();
-		jeux.stream().filter(jeu -> jeu.getNom().equals(nom)).forEach(jeuxTrouves::add);
-		return jeuxTrouves;
-	}
-	
 	public ArrayList<Jeu> getJeuParId(long id){
 		ArrayList<Jeu> jeuxTrouves = new ArrayList<>();
 		jeux.stream().filter(jeu -> jeu.getId() == id).forEach(jeuxTrouves::add);
