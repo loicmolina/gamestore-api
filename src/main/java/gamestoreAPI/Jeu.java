@@ -12,7 +12,7 @@ public class Jeu {
 	private String genre2;
 	
 	public Jeu(){	}
-	
+	//C sarp
 	public Jeu(long id, String nom){
 		this.id = id;
 		this.nom = nom;
