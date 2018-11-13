@@ -13,7 +13,7 @@ public class Magasin {
 	}
 	
 	public boolean addJeu(Jeu jeu) throws Exception{
-		if (jeu.getId() > 0 && !getJeuParId(jeu.getId()).contains(jeu)){
+		if (jeu.getId() > 0 && getJeuParId(jeu.getId()) == null){
 			jeux.add(jeu);
 			database.insertValue(jeu);
 			return true;
@@ -21,10 +21,8 @@ public class Magasin {
 		return false;
 	}	
 	
-	public ArrayList<Jeu> getJeuParId(long id){
-		ArrayList<Jeu> jeuxTrouves = new ArrayList<>();
-		jeux.stream().filter(jeu -> jeu.getId() == id).forEach(jeuxTrouves::add);
-		return jeuxTrouves;
+	public Jeu getJeuParId(long id){
+		return jeux.stream().filter(jeu -> jeu.getId() == id).findFirst().orElse(null);
 	}
 	
 	public ArrayList<Jeu> getJeux(){
@@ -36,10 +34,10 @@ public class Magasin {
 	}
 
 	public boolean deleteJeu(long id) throws Exception {
-		ArrayList<Jeu> jeuxTrouves = this.getJeuParId(id);
-		if (jeuxTrouves.size() > 0){
-			jeux.remove(jeuxTrouves.get(0));
-			database.deleteValue(jeuxTrouves.get(0));
+		Jeu jeu = this.getJeuParId(id);
+		if (jeu != null){
+			jeux.remove(jeu);
+			database.deleteValue(jeu);
 			return true;
 		}		
 		return false;

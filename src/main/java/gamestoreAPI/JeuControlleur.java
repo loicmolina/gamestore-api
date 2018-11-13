@@ -3,6 +3,8 @@ package gamestoreAPI;
 import java.util.ArrayList;
 
 import org.json.JSONObject;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -26,46 +28,52 @@ public class JeuControlleur{
 	}
 	
 	@RequestMapping(value = "/jeux", consumes = { "application/json" }, method = RequestMethod.POST)
-	public String ajouterJeu(@RequestBody Jeu jeu) throws Exception {
+	public ResponseEntity<?> ajouterJeu(@RequestBody Jeu jeu) throws Exception {
 		boolean res = magasin.addJeu(jeu);		
-		return res ? String.format(templateJeuAjoute, jeu.getNom())
-				: String.format(templateJeuDejaPresent, jeu.getId());
+		return res ? new ResponseEntity<String>( String.format(templateJeuAjoute, jeu.getNom()) , HttpStatus.OK)
+				: new ResponseEntity<String>( String.format(templateJeuDejaPresent, jeu.getId()) , HttpStatus.CONFLICT);
 	}
 
 	@RequestMapping(value = "/jeux/{id}", produces = { "application/json" }, method = RequestMethod.GET)
-	public ArrayList<Jeu> getJeuxParNom(@PathVariable("id") long id) {
-		return magasin.getJeuParId(id);
+	public ResponseEntity<?> getJeuxParNom(@PathVariable("id") long id) {
+		Jeu jeuRecherche =  magasin.getJeuParId(id) ;
+		if (jeuRecherche == null){
+			return new ResponseEntity<String>( String.format(templateJeuInexistant, id ) , HttpStatus.NOT_FOUND);
+		}
+		return new ResponseEntity<Object>(jeuRecherche, HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/jeux/{id}", produces = { "application/json" }, method = RequestMethod.DELETE)
-	public String deleteJeu(@PathVariable("id") int id) throws Exception {
+	public ResponseEntity<?> deleteJeu(@PathVariable("id") int id) throws Exception {
 		if (id != 0) {
 			boolean res = magasin.deleteJeu(id);
-			return res ? String.format(templateJeuSupprime, id) : String.format(templateJeuInexistant, id);
+			if (res){
+				return new ResponseEntity<String>( String.format(templateJeuSupprime, id) , HttpStatus.OK);
+			}
 		}
-		return String.format(templateJeuInexistant, id);
+		return new ResponseEntity<String>( String.format(templateJeuInexistant, id) , HttpStatus.NOT_FOUND);
 	}
 
 	@RequestMapping(value = "/jeux/{id}", produces = { "application/json" }, method = RequestMethod.PUT)
-	public String modifierJeu(@RequestBody Jeu jeu, @PathVariable("id") int id) throws Exception {
+	public ResponseEntity<?> modifierJeu(@RequestBody Jeu jeu, @PathVariable("id") int id) throws Exception {
 		if (id != 0 && id == jeu.getId()) {
 			boolean res = magasin.deleteJeu(id);
 			if (res){
 				magasin.addJeu(jeu);
-				return String.format(templateJeuModifie, jeu.getNom());
+				return new ResponseEntity<String>( String.format(templateJeuModifie, jeu.getNom()) , HttpStatus.OK);
 			}
 		}
-		return String.format(templateJeuInexistant, id);
+		return new ResponseEntity<String>( String.format(templateJeuInexistant, id) , HttpStatus.NOT_FOUND);
 	}
 
 	@RequestMapping(value = "/jeux", produces = { "application/json" }, method = RequestMethod.GET)
-	public ArrayList<Jeu> getJeux() {
-		return magasin.getJeux();
+	public ResponseEntity<?> getJeux() {
+		return new ResponseEntity<ArrayList<Jeu>>( magasin.getJeux(), HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/jeux", method = RequestMethod.DELETE)
-	public String deleteJeux() {
+	public ResponseEntity<?> deleteJeux() {
 		magasin.deleteJeux();
-		return jeuxSupprimes;
+		return new ResponseEntity<String>( jeuxSupprimes , HttpStatus.OK);
 	}
 }
