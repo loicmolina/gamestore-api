@@ -30,7 +30,7 @@ public class JeuControlleur{
 	@RequestMapping(value = "/jeux", consumes = { "application/json" }, method = RequestMethod.POST)
 	public ResponseEntity<?> ajouterJeu(@RequestBody Jeu jeu) throws Exception {
 		boolean res = magasin.addJeu(jeu);		
-		return res ? new ResponseEntity<String>( String.format(templateJeuAjoute, jeu.getNom()) , HttpStatus.OK)
+		return res ? new ResponseEntity<String>( String.format(templateJeuAjoute, jeu.getNom()) , HttpStatus.CREATED)
 				: new ResponseEntity<String>( String.format(templateJeuDejaPresent, jeu.getId()) , HttpStatus.CONFLICT);
 	}
 
