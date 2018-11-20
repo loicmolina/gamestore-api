@@ -9,11 +9,11 @@ public class Magasin {
 	public Magasin() throws Exception{
 		jeux = new ArrayList<Jeu>();
 		database.createDataBase();
-		jeux = database.getValues();
+		jeux = database.getValues();		
 	}
 	
 	public boolean addJeu(Jeu jeu) throws Exception{
-		if (jeu.getId() > 0 && getJeuParId(jeu.getId()) == null){
+		if (getJeuParId(jeu.getId()) == null){
 			jeux.add(jeu);
 			database.insertValue(jeu);
 			return true;
@@ -43,7 +43,8 @@ public class Magasin {
 		return false;
 	}
 	
-	public void deleteJeux() {
+	public void deleteJeux() throws Exception {
+		database.deleteValues();
 		jeux.clear();	
 	}
 }

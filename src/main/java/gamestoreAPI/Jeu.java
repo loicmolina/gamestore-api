@@ -12,7 +12,7 @@ public class Jeu {
 	private String genre2;
 	
 	public Jeu(){	}
-	//C sarp
+	
 	public Jeu(long id, String nom){
 		this.id = id;
 		this.nom = nom;
@@ -69,6 +69,10 @@ public class Jeu {
 	@Override
 	public boolean equals(Object obj) {
 		return this.id == (( ((Jeu)obj).getId() ));
+	}
+	
+	public boolean dateCorrect(){
+		return dateSortie.matches("\\d{2}/\\d{2}/\\d{4}");
 	}
 	
 }

@@ -77,8 +77,17 @@ public class H2DataBase {
 	
 	public void deleteValue(Jeu jeu) throws Exception{
 		try {
-			StringBuilder sql = new StringBuilder("DELETE FROM MAGASIN WHERE id == "
+			StringBuilder sql = new StringBuilder("DELETE FROM MAGASIN WHERE id = "
 					+ Long.toString(jeu.getId()) );
+			stmt.executeUpdate(sql.toString());
+		} catch(Exception e) {
+			System.err.println(e.getMessage());
+		}		
+	}
+	
+	public void deleteValues() throws Exception{
+		try {
+			StringBuilder sql = new StringBuilder("DELETE FROM MAGASIN");
 			stmt.executeUpdate(sql.toString());
 		} catch(Exception e) {
 			System.err.println(e.getMessage());

@@ -1,15 +1,16 @@
 package gamestoreAPI;
 
 import java.util.ArrayList;
+import java.util.concurrent.atomic.AtomicInteger;
 
-import org.json.JSONObject;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class JeuControlleur{
-
+	private final static AtomicInteger counter = new AtomicInteger();
+	
 	private static final String templateJeuAjoute = "Le jeu %s a été ajouté !";
 	private static final String templateJeuDejaPresent = "Un jeu possédant l'id %d existe déjà !";
 	private static final String templateJeuSupprime = "L'identifiant %d a été supprimé !";
@@ -19,9 +20,11 @@ public class JeuControlleur{
 	
 	private static Magasin magasin;
 	
+	
 	static{
 		try {
 			magasin = new Magasin();
+			counter.set(magasin.getJeux().size());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -29,6 +32,10 @@ public class JeuControlleur{
 	
 	@RequestMapping(value = "/jeux", consumes = { "application/json" }, method = RequestMethod.POST)
 	public ResponseEntity<?> ajouterJeu(@RequestBody Jeu jeu) throws Exception {
+		if (jeu.getDateSortie() != null && !jeu.dateCorrect()){
+			return new ResponseEntity<String>( "La date entrée n'est pas au bon format dd/MM/yyyy", HttpStatus.BAD_REQUEST);
+		}
+		jeu.setId(counter.getAndIncrement());
 		boolean res = magasin.addJeu(jeu);		
 		return res ? new ResponseEntity<String>( String.format(templateJeuAjoute, jeu.getNom()) , HttpStatus.CREATED)
 				: new ResponseEntity<String>( String.format(templateJeuDejaPresent, jeu.getId()) , HttpStatus.CONFLICT);
@@ -56,12 +63,12 @@ public class JeuControlleur{
 
 	@RequestMapping(value = "/jeux/{id}", produces = { "application/json" }, method = RequestMethod.PUT)
 	public ResponseEntity<?> modifierJeu(@RequestBody Jeu jeu, @PathVariable("id") int id) throws Exception {
-		if (id != 0 && id == jeu.getId()) {
-			boolean res = magasin.deleteJeu(id);
-			if (res){
-				magasin.addJeu(jeu);
-				return new ResponseEntity<String>( String.format(templateJeuModifie, jeu.getNom()) , HttpStatus.OK);
-			}
+		Jeu recherche = magasin.getJeuParId(id);
+		if (recherche != null) {
+			magasin.deleteJeu(id);
+			jeu.setId(id);
+			magasin.addJeu(jeu);
+			return new ResponseEntity<String>( String.format(templateJeuModifie, jeu.getNom()) , HttpStatus.OK);			
 		}
 		return new ResponseEntity<String>( String.format(templateJeuInexistant, id) , HttpStatus.NOT_FOUND);
 	}
@@ -72,7 +79,7 @@ public class JeuControlleur{
 	}
 
 	@RequestMapping(value = "/jeux", method = RequestMethod.DELETE)
-	public ResponseEntity<?> deleteJeux() {
+	public ResponseEntity<?> deleteJeux() throws Exception {
 		magasin.deleteJeux();
 		return new ResponseEntity<String>( jeuxSupprimes , HttpStatus.OK);
 	}
