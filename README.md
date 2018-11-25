@@ -24,6 +24,7 @@ Les jeux se composent des éléments suivants:
 * Un developpeur
 * Un premier genre
 * Un second genre
+
 Les différents attributs sont tous optionnels. Un ID leur sera affecté leur sera affecté lors de leur entrée dans la base.
 
 Voici les différentes requêtes utilisables de cette API :
