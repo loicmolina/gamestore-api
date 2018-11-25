@@ -1,4 +1,4 @@
-package gamestoreAPI;
+package fr.mim.gamestoreAPI;
 
 import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicInteger;

@@ -1,4 +1,4 @@
-package gamestoreAPI;
+package fr.mim.gamestoreAPI;
 
 import java.util.Date;
 import java.lang.String;

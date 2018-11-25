@@ -1,4 +1,4 @@
-package gamestoreAPI;
+package fr.mim.gamestoreAPI;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
