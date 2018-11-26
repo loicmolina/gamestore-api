@@ -1,4 +1,4 @@
-package fr.mim.gamestoreAPI.serveur;
+package fr.mim.gamestoreAPI;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
