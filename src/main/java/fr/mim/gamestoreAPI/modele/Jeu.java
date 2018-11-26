@@ -1,6 +1,5 @@
-package fr.mim.gamestoreAPI;
+package fr.mim.gamestoreAPI.modele;
 
-import java.util.Date;
 import java.lang.String;
 
 public class Jeu {

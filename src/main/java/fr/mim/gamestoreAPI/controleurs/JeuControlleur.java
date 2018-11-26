@@ -1,4 +1,4 @@
-package fr.mim.gamestoreAPI;
+package fr.mim.gamestoreAPI.controleurs;
 
 import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -6,6 +6,9 @@ import java.util.concurrent.atomic.AtomicInteger;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import fr.mim.gamestoreAPI.modele.Jeu;
+import fr.mim.gamestoreAPI.modele.Magasin;
 
 @RestController
 public class JeuControlleur{
@@ -82,5 +85,11 @@ public class JeuControlleur{
 	public ResponseEntity<?> deleteJeux() throws Exception {
 		magasin.deleteJeux();
 		return new ResponseEntity<String>( jeuxSupprimes , HttpStatus.OK);
+	}
+	
+	@RequestMapping(value = "/recherche/{nom}", produces = { "application/json" }, method = RequestMethod.GET)
+	public ResponseEntity<?> rechercheJeux(@PathVariable("nom") String nom) {
+		ArrayList<Jeu> jeuxRecherche =  magasin.rechercheJeux(nom) ;
+		return new ResponseEntity<Object>(jeuxRecherche, HttpStatus.OK);
 	}
 }

@@ -1,10 +1,12 @@
-package fr.mim.gamestoreAPI;
+package fr.mim.gamestoreAPI.database;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
+
+import fr.mim.gamestoreAPI.modele.Jeu;
 
 public class H2DataBase {
 	private Connection con;

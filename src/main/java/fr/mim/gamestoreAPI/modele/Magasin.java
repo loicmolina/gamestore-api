@@ -1,6 +1,11 @@
-package fr.mim.gamestoreAPI;
+package fr.mim.gamestoreAPI.modele;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
+import fr.mim.gamestoreAPI.database.H2DataBase;
+import fr.mim.gamestoreAPI.utils.TextUtils;
 
 public class Magasin {
 	private ArrayList<Jeu> jeux;
@@ -46,5 +51,12 @@ public class Magasin {
 	public void deleteJeux() throws Exception {
 		database.deleteValues();
 		jeux.clear();	
+	}
+	
+	public ArrayList<Jeu> rechercheJeux(String nom){
+		String comparaison = ".*"+  TextUtils.normaliser(nom)  +".*";
+		List<Jeu> res = jeux.stream().filter(jeu -> TextUtils.normaliser(jeu.getNom()).matches(comparaison)).collect(Collectors.toList());;
+		
+		return (ArrayList<Jeu>) res;
 	}
 }
