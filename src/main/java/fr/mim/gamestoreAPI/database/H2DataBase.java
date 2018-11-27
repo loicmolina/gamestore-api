@@ -3,19 +3,22 @@ package fr.mim.gamestoreAPI.database;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
 import fr.mim.gamestoreAPI.modele.Jeu;
 
-public class H2DataBase {
-	private Connection con;
+public class H2DataBase {	
 	private Statement stmt;
 
-	public void createDataBase() throws Exception {
+	public H2DataBase(){}
+	
+	public void createDataBase() throws SQLException, InstantiationException, IllegalAccessException, ClassNotFoundException {
 		try {
-			Class.forName("org.h2.Driver").newInstance();
-			con = DriverManager.getConnection("jdbc:h2:" + "./database/dataFile", "root", "password");
+			Class classe = Class.forName("org.h2.Driver");
+			classe.newInstance();
+			Connection con = DriverManager.getConnection("jdbc:h2:" + "./database/dataFile", "root", "password");
 			stmt = con.createStatement();
 
 			String sql = "CREATE TABLE IF NOT EXISTS MAGASIN" 
@@ -34,7 +37,7 @@ public class H2DataBase {
 		}
 	}
 	
-	public void insertValue(Jeu jeu) throws Exception{
+	public void insertValue(Jeu jeu) throws SQLException{
 		try {
 			String sql = "INSERT INTO MAGASIN(id,nom,dateSortie,developpeur,genre1,genre2) values ("
 					+ Long.toString(jeu.getId()) + ",\'"
@@ -50,34 +53,7 @@ public class H2DataBase {
 		}		
 	}
 	
-	public void changeValue(Jeu jeu) throws Exception{
-		try {
-			StringBuilder startsql = new StringBuilder("UPDATE MAGASIN SET");
-			if (jeu.getNom() != null){
-				startsql.append("nom = \'"+ jeu.getNom() +"\' ,");
-			}
-			if (jeu.getDateSortie() != null){
-				startsql.append("dateSortie = \'"+ jeu.getDateSortie() +"\' ,");
-			}
-			if (jeu.getDeveloppeur() != null){
-				startsql.append("developpeur = \'"+ jeu.getDeveloppeur() +"\' ,");
-			}
-			if (jeu.getGenre1() != null){
-				startsql.append("genre1 = \'"+ jeu.getGenre1() +"\' ,");
-			}
-			if (jeu.getGenre2() != null){
-				startsql.append("genre2 = \'"+ jeu.getGenre2() +"\' ,");
-			}
-			StringBuilder sql = new StringBuilder(startsql.substring(0, startsql.length()-2));
-			sql.append("WHERE id == "+Long.toString(jeu.getId()));
-			
-			stmt.executeUpdate(sql.toString());
-		} catch(Exception e) {
-			System.err.println(e.getMessage());
-		}		
-	}
-	
-	public void deleteValue(Jeu jeu) throws Exception{
+	public void deleteValue(Jeu jeu) throws SQLException{
 		try {
 			StringBuilder sql = new StringBuilder("DELETE FROM MAGASIN WHERE id = "
 					+ Long.toString(jeu.getId()) );
@@ -87,7 +63,7 @@ public class H2DataBase {
 		}		
 	}
 	
-	public void deleteValues() throws Exception{
+	public void deleteValues() throws SQLException{
 		try {
 			StringBuilder sql = new StringBuilder("DELETE FROM MAGASIN");
 			stmt.executeUpdate(sql.toString());
@@ -96,7 +72,7 @@ public class H2DataBase {
 		}		
 	}
 	
-	public ArrayList<Jeu> getValues() throws Exception{
+	public ArrayList<Jeu> getValues() throws SQLException{
 		ArrayList<Jeu> jeux = new ArrayList<Jeu>();
 		try {
 			StringBuilder sql = new StringBuilder("SELECT * FROM MAGASIN");

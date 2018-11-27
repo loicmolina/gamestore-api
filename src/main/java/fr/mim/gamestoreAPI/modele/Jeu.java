@@ -67,7 +67,7 @@ public class Jeu {
 
 	@Override
 	public boolean equals(Object obj) {
-		return this.id == (( ((Jeu)obj).getId() ));
+		return this.id == ((Jeu)obj).getId();
 	}
 	
 	public boolean dateCorrect(){
