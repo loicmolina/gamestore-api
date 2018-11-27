@@ -8,7 +8,7 @@ properties([buildDiscarder(logRotator( artifactNumToKeepStr: '5', numToKeepStr: 
 node {
 	
 	// On définit le nom de l'image docker qui sera buildée. 
-	def imageName = "spring-boot-fac"
+	def imageName = "gamestore-boot"
 	
 	
     stage('checkout') {
@@ -47,6 +47,12 @@ node {
                 junit '**/target/surefire-reports/TEST-*.xml'
             }
         }
+        
+        stage('quality analysis') {
+ 			withSonarQubeEnv('sonar'){
+ 				sh "./mvnw sonar:sonar"
+			}
+		}		
  
         stage('packaging') {
             sh "./mvnw verify -Pprod -DskipTests"
