@@ -55,8 +55,8 @@ public class H2DataBase {
 	
 	public void deleteValue(Jeu jeu) throws SQLException{
 		try {
-			StringBuilder sql = new StringBuilder("DELETE FROM MAGASIN WHERE id = "
-					+ Long.toString(jeu.getId()) );
+			StringBuilder sql = new StringBuilder("DELETE FROM MAGASIN WHERE id = ");
+					sql.append(Long.toString(jeu.getId()) );
 			stmt.executeUpdate(sql.toString());
 		} catch(Exception e) {
 			System.err.println(e.getMessage());
