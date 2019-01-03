@@ -1,6 +1,7 @@
 package fr.mim.gamestoreAPI.controleurs;
 
 import java.util.ArrayList;
+import java.util.Set;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import org.springframework.http.HttpStatus;
@@ -55,7 +56,7 @@ public class JeuControlleur{
 
 	@RequestMapping(value = "/jeux/{id}", produces = { "application/json" }, method = RequestMethod.DELETE)
 	public ResponseEntity<?> deleteJeu(@PathVariable("id") int id) throws Exception {
-		if (id != 0) {
+		if (id >= 0) {
 			boolean res = magasin.deleteJeu(id);
 			if (res){
 				return new ResponseEntity<String>( String.format(templateJeuSupprime, id) , HttpStatus.OK);
@@ -78,7 +79,7 @@ public class JeuControlleur{
 
 	@RequestMapping(value = "/jeux", produces = { "application/json" }, method = RequestMethod.GET)
 	public ResponseEntity<?> getJeux() {
-		return new ResponseEntity<ArrayList<Jeu>>( magasin.getJeux(), HttpStatus.OK);
+		return new ResponseEntity<Set<Jeu>>( magasin.getJeux(), HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/jeux", method = RequestMethod.DELETE)

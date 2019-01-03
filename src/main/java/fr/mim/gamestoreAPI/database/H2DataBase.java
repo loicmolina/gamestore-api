@@ -6,6 +6,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 import fr.mim.gamestoreAPI.modele.Jeu;
 
@@ -72,8 +74,8 @@ public class H2DataBase {
 		}		
 	}
 	
-	public ArrayList<Jeu> getValues() throws SQLException{
-		ArrayList<Jeu> jeux = new ArrayList<Jeu>();
+	public Set<Jeu> getValues() throws SQLException{
+		Set<Jeu> jeux = new HashSet<Jeu>();;
 		try {
 			StringBuilder sql = new StringBuilder("SELECT * FROM MAGASIN");
 			ResultSet rs = stmt.executeQuery(sql.toString());
