@@ -55,8 +55,8 @@ public class RechercheTests {
 		
 		//Then
 		assertEquals(resultat.size(),2);
-		assertEquals(resultat.get(1).getNom(),jeu.getNom());
-		assertEquals(resultat.get(2).getNom(),jeu2.getNom());
+		assertEquals(resultat.get(0).getNom(),jeu.getNom());
+		assertEquals(resultat.get(1).getNom(),jeu2.getNom());
 	}
 	
 	@Test
