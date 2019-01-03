@@ -33,6 +33,8 @@ Voici les différentes requêtes utilisables de cette API :
 * localhost:8080/magasin/jeux : retourne tout les jeux disponibles dans le magasin
 * localhost:8080/magasin/jeux/[ID] : retourne tout les jeux disponibles dans le magasin
 
+* localhost:8080/magasin/recherche/[mot] : recherche les jeux du magasin portant un nom contenant le mot indiqué dans l'URI
+
 ### Post
 * localhost:8080/magasin/jeux + Requête JSON : ajoute un nouveau jeu dans le magasin 
 
