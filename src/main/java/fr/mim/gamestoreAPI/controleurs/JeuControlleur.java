@@ -27,7 +27,7 @@ public class JeuControlleur{
 	
 	static{
 		try {
-			magasin = new Magasin();
+			magasin = new Magasin(true);
 			counter.set(magasin.getJeux().size());
 		} catch (Exception e) {
 			e.printStackTrace();

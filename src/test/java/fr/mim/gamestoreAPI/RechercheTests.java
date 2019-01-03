@@ -19,14 +19,14 @@ public class RechercheTests {
 	@Test
 	public void testRechercheSimple() throws Exception {
 		//Given
-		Magasin magasin = new Magasin();
+		Magasin magasin = new Magasin(false);
 		Jeu jeu = new Jeu();
-		jeu.setNom("Super Smash Bros Ultimate");		
+		jeu.setNom("Tekken 5");		
 		
 		magasin.addJeuLocal(jeu);
 		
 		//When
-		ArrayList<Jeu> resultat = magasin.rechercheJeux("Smash");
+		ArrayList<Jeu> resultat = magasin.rechercheJeux("Tekken");
 		
 		//Then
 		assertEquals(resultat.size(),1);
@@ -36,12 +36,12 @@ public class RechercheTests {
 	@Test
 	public void testRechercheMultiple() throws Exception {
 		//Given
-		Magasin magasin = new Magasin();
+		Magasin magasin = new Magasin(false);
 		Jeu jeu = new Jeu();
-		jeu.setNom("Super Smash Bros Ultimate");	
+		jeu.setNom("Super Mario Bros.");	
 		
 		Jeu jeu2 = new Jeu();
-		jeu2.setNom("Super Smash Bros Melee");		
+		jeu2.setNom("Mario Odyssey");		
 
 		Jeu jeu3 = new Jeu();
 		jeu3.setNom("Overwatch");		
@@ -51,7 +51,7 @@ public class RechercheTests {
 		magasin.addJeuLocal(jeu3);
 		
 		//When
-		ArrayList<Jeu> resultat = magasin.rechercheJeux("Smash");
+		ArrayList<Jeu> resultat = magasin.rechercheJeux("Mario");
 		
 		//Then
 		assertEquals(resultat.size(),2);
@@ -62,7 +62,7 @@ public class RechercheTests {
 	@Test
 	public void testRechercheVide() throws Exception {
 		//Given
-		Magasin magasin = new Magasin();
+		Magasin magasin = new Magasin(false);
 		Jeu jeu = new Jeu();
 		jeu.setNom("NieR : Automata");		
 		
