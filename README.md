@@ -15,7 +15,8 @@ Pour pouvoir utiliser cette API, il faudra suivre les étapes suivantes
 
 ## Utilisation
 
-Chaque requêtes doit doit commencer avec l'URI suivant : localhost:8080/magasin/jeux
+Chaque requête doit commencer avec l'URI suivant : localhost:8080/magasin/jeux
+[Documentation Swagger](https://app.swaggerhub.com/apis-docs/loicmolina1/gamestore-API/0.1)
 Les jeux se composent des éléments suivants:
 
 ### Structure d'un jeu :
