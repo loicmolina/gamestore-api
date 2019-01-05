@@ -10,14 +10,14 @@ public class Jeu {
 	private String genre1;
 	private String genre2;
 	private final static String PATTERNDATE = "\\d{2}/\\d{2}/\\d{4}";
-	
+
 	public Jeu(){	}
-	
+
 	public Jeu(long id, String nom){
 		this.id = id;
 		this.nom = nom;
 	}
-	
+
 	public long getId() {
 		return id;
 	}
@@ -29,23 +29,23 @@ public class Jeu {
 	public String getNom() {
 		return nom;
 	}
-	
+
 	public void setNom(String nom) {
 		this.nom = nom;
 	}
-	
+
 	public String getDateSortie() {
 		return dateSortie;
 	}
-	
+
 	public void setDateSortie(String dateSortie) {
 		this.dateSortie = dateSortie;
 	}
-	
+
 	public String getDeveloppeur() {
 		return developpeur;
 	}
-	
+
 	public void setDeveloppeur(String developpeur) {
 		this.developpeur = developpeur;
 	}
@@ -68,13 +68,16 @@ public class Jeu {
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj != null){
-			return this.id == ((Jeu)obj).getId();
-		}else{
-			throw new NullPointerException("L'objet est vide");
+		if (obj == null) {
+			return false;
 		}
+		if (this.getClass() != obj.getClass()) {
+			return false;
+		}
+		Jeu jeu = (Jeu) obj;
+		return this.id == jeu.getId();
 	}
-	
+
 	@Override
 	public int hashCode() {
 		return super.hashCode();
@@ -83,5 +86,5 @@ public class Jeu {
 	public boolean dateCorrect(){
 		return dateSortie.matches(PATTERNDATE);
 	}
-	
+
 }
