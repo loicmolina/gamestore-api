@@ -9,6 +9,7 @@ public class Jeu {
 	private String developpeur;
 	private String genre1;
 	private String genre2;
+	private final static String PATTERNDATE = "\\d{2}/\\d{2}/\\d{4}";
 	
 	public Jeu(){	}
 	
@@ -80,7 +81,7 @@ public class Jeu {
 	}
 
 	public boolean dateCorrect(){
-		return dateSortie.matches("\\d{2}/\\d{2}/\\d{4}");
+		return dateSortie.matches(PATTERNDATE);
 	}
 	
 }
