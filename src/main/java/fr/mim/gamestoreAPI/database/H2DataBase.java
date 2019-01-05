@@ -110,6 +110,7 @@ public class H2DataBase {
 				jeu.setGenre2(rs.getString("genre2"));
 				jeux.add(jeu);
 			}
+			rs.close();
 		} catch (Exception e) {
 			LOGGER.log(Level.WARNING, e.getMessage());
 		} finally {

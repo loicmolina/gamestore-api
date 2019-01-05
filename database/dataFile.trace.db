@@ -10,3 +10,12 @@ The object is already closed [90007-197]
 2019-01-05 15:45:29 jdbc[3]: exception
 org.h2.jdbc.JdbcSQLException: Lobjet est déjà fermé
 The object is already closed [90007-197]
+2019-01-05 18:08:51 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Lobjet est déjà fermé
+The object is already closed [90007-197]
+2019-01-05 18:09:37 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Lobjet est déjà fermé
+The object is already closed [90007-197]
+2019-01-05 18:09:51 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Lobjet est déjà fermé
+The object is already closed [90007-197]
