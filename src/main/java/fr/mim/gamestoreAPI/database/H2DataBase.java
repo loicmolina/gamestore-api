@@ -14,15 +14,13 @@ import fr.mim.gamestoreAPI.modele.Jeu;
 
 public class H2DataBase {
 	private Statement stmt;
-	private static final Logger LOGGER = Logger.getLogger( H2DataBase.class.getName() );
+	private static final Logger LOGGER = Logger.getLogger(H2DataBase.class.getName());
+	private Connection con;
 
 	public void createDataBase()
 			throws SQLException, InstantiationException, IllegalAccessException, ClassNotFoundException {
-		Connection con = null;
 		try {
-			Class<?> classe = Class.forName("org.h2.Driver");
-			classe.newInstance();
-			con = DriverManager.getConnection("jdbc:h2:" + "./database/dataFile", "root", "password");
+			connectionToDatabase();
 			stmt = con.createStatement();
 
 			String sql = "CREATE TABLE IF NOT EXISTS MAGASIN" + "(id INTEGER," + "nom VARCHAR(255),"
@@ -34,10 +32,25 @@ public class H2DataBase {
 
 		} catch (Exception e) {
 			LOGGER.log(Level.WARNING, e.getMessage());
+		} finally {
+			closeConnectionToDatabase();
 		}
 	}
 
-	public void insertValue(Jeu jeu) throws SQLException {
+	public void connectionToDatabase()
+			throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException {
+		Class<?> classe = Class.forName("org.h2.Driver");
+		classe.newInstance();
+		con = DriverManager.getConnection("jdbc:h2:" + "./database/dataFile", "root", "password");
+	}
+
+	public void closeConnectionToDatabase() throws SQLException {
+		con.close();
+	}
+
+	public void insertValue(Jeu jeu)
+			throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+		connectionToDatabase();
 		String separateur = "\',\'";
 		try {
 			String sql = "INSERT INTO MAGASIN(id,nom,dateSortie,developpeur,genre1,genre2) values ("
@@ -47,29 +60,41 @@ public class H2DataBase {
 			stmt.executeUpdate(sql);
 		} catch (Exception e) {
 			LOGGER.log(Level.WARNING, e.getMessage());
+		} finally {
+			closeConnectionToDatabase();
 		}
 	}
 
-	public void deleteValue(Jeu jeu) throws SQLException {
+	public void deleteValue(Jeu jeu)
+			throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+		connectionToDatabase();
 		try {
 			StringBuilder sql = new StringBuilder("DELETE FROM MAGASIN WHERE id = ");
 			sql.append(Long.toString(jeu.getId()));
 			stmt.executeUpdate(sql.toString());
 		} catch (Exception e) {
 			LOGGER.log(Level.WARNING, e.getMessage());
+		} finally {
+			closeConnectionToDatabase();
 		}
 	}
 
-	public void deleteValues() throws SQLException {
+	public void deleteValues()
+			throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+		connectionToDatabase();
 		try {
 			StringBuilder sql = new StringBuilder("DELETE FROM MAGASIN");
 			stmt.executeUpdate(sql.toString());
 		} catch (Exception e) {
 			LOGGER.log(Level.WARNING, e.getMessage());
+		} finally {
+			closeConnectionToDatabase();
 		}
 	}
 
-	public Set<Jeu> getValues() throws SQLException {
+	public Set<Jeu> getValues()
+			throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+		connectionToDatabase();
 		Set<Jeu> jeux = new HashSet<>();
 		ResultSet rs = null;
 		try {
@@ -87,6 +112,8 @@ public class H2DataBase {
 			}
 		} catch (Exception e) {
 			LOGGER.log(Level.WARNING, e.getMessage());
+		} finally {
+			closeConnectionToDatabase();
 		}
 		return jeux;
 	}
