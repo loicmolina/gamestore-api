@@ -5,8 +5,9 @@ mieux un projet.
 
 ## Installation
 Pour pouvoir utiliser cette API, il faudra suivre les étapes suivantes
-* S'assurer d'avoir installer un [JRE](https://www.oracle.com/technetwork/java/javase/downloads/jre8-downloads-2133155.html) et [Maven](https://maven.apache.org/install.html)
-* Télécharger via un zip ou un git clone ce projet
+* Installer [JRE](https://www.oracle.com/technetwork/java/javase/downloads/jre8-downloads-2133155.html)
+* Installer [Maven](https://maven.apache.org/download.cgi) ([installation](https://maven.apache.org/install.html))
+* Récupérer via un zip ou un git clone ce projet
 
 ## Lancement
 
