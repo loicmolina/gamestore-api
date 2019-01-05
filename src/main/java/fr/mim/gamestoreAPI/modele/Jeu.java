@@ -67,9 +67,18 @@ public class Jeu {
 
 	@Override
 	public boolean equals(Object obj) {
-		return this.id == ((Jeu)obj).getId();
+		if (obj != null){
+			return this.id == ((Jeu)obj).getId();
+		}else{
+			throw new NullPointerException("L'objet est vide");
+		}
 	}
 	
+	@Override
+	public int hashCode() {
+		return super.hashCode();
+	}
+
 	public boolean dateCorrect(){
 		return dateSortie.matches("\\d{2}/\\d{2}/\\d{4}");
 	}

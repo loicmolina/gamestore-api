@@ -15,7 +15,7 @@ public class Magasin {
 	private static H2DataBase database = new H2DataBase();
 
 	public Magasin(boolean recuperationDonnees) throws Exception {
-		jeux = new HashSet<Jeu>();
+		jeux = new HashSet<>();
 		if (recuperationDonnees) {
 			database.createDataBase();
 			jeux = database.getValues();

@@ -17,10 +17,11 @@ public class H2DataBase {
 	public H2DataBase(){}
 	
 	public void createDataBase() throws SQLException, InstantiationException, IllegalAccessException, ClassNotFoundException {
+		Connection con = null;
 		try {
 			Class classe = Class.forName("org.h2.Driver");
 			classe.newInstance();
-			Connection con = DriverManager.getConnection("jdbc:h2:" + "./database/dataFile", "root", "password");
+			con = DriverManager.getConnection("jdbc:h2:" + "./database/dataFile", "root", "password");
 			stmt = con.createStatement();
 
 			String sql = "CREATE TABLE IF NOT EXISTS MAGASIN" 
@@ -34,9 +35,15 @@ public class H2DataBase {
 
 			stmt.executeUpdate(sql);
 			System.out.println("Table created");
+			
+			
+			
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
 		}
+		finally{
+			con.close();
+		}		
 	}
 	
 	public void insertValue(Jeu jeu) throws SQLException{
@@ -75,10 +82,11 @@ public class H2DataBase {
 	}
 	
 	public Set<Jeu> getValues() throws SQLException{
-		Set<Jeu> jeux = new HashSet<Jeu>();;
+		Set<Jeu> jeux = new HashSet<>();
+		ResultSet rs = null;
 		try {
 			StringBuilder sql = new StringBuilder("SELECT * FROM MAGASIN");
-			ResultSet rs = stmt.executeQuery(sql.toString());
+			rs = stmt.executeQuery(sql.toString());
 			while (rs.next()){
 				Jeu jeu = new Jeu();
 				jeu.setId(rs.getLong("id"));
@@ -91,6 +99,9 @@ public class H2DataBase {
 			}
 		} catch(Exception e) {
 			System.err.println(e.getMessage());
+		}
+		finally{
+			rs.close();
 		}
 		return jeux;	
 	}
