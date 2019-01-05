@@ -5,17 +5,27 @@ mieux un projet.
 
 ## Installation
 Pour pouvoir utiliser cette API, il faudra suivre les étapes suivantes
-* S'assurer d'avoir installer un [JRE](https://www.oracle.com/technetwork/java/javase/downloads/jre8-downloads-2133155.html) et [Maven](https://maven.apache.org/install.html)
-* Télécharger via un zip ou un git clone ce projet
+* Installer [JRE](https://www.oracle.com/technetwork/java/javase/downloads/jre8-downloads-2133155.html)
+* Installer [Maven](https://maven.apache.org/download.cgi) ([installation](https://maven.apache.org/install.html))
+* Récupérer via un zip ou un git clone ce projet
 
 ## Lancement
-* Ouvrez une invite de commande
-* Placez vous dans le dossier téléchargé
-* executez la commande suivante : mvn spring-boot:run
+
+via une invite de commande :
+* Ouvrir une invite de commande
+* Placer vous dans le dossier téléchargé
+* Executer la commande suivante : mvn spring-boot:run
+
+via un IDE :
+* Importer le projet
+* Lancer le fichier Application. java situé dans src/main/java/fr/mim/gamestoreAPI/
 
 ## Utilisation
 
-Chaque requêtes doit doit commencer avec l'URI suivant : localhost:8080/magasin/jeux
+[Documentation Swagger](https://app.swaggerhub.com/apis-docs/loicmolina1/gamestore-API/0.1)
+
+Chaque requête doit commencer avec l'URI suivant : localhost:8080/magasin/jeux
+
 Les jeux se composent des éléments suivants:
 
 ### Structure d'un jeu :
