@@ -34,6 +34,8 @@ public class H2DataBase {
 
 		} catch (Exception e) {
 			LOGGER.log(Level.WARNING, e.getMessage());
+		} finally {
+			con.close();
 		}
 	}
 
@@ -87,6 +89,8 @@ public class H2DataBase {
 			}
 		} catch (Exception e) {
 			LOGGER.log(Level.WARNING, e.getMessage());
+		} finally {
+			rs.close();
 		}
 		return jeux;
 	}
