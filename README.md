@@ -9,9 +9,15 @@ Pour pouvoir utiliser cette API, il faudra suivre les étapes suivantes
 * Télécharger via un zip ou un git clone ce projet
 
 ## Lancement
-* Ouvrez une invite de commande
-* Placez vous dans le dossier téléchargé
-* executez la commande suivante : mvn spring-boot:run
+
+via une invite de commande :
+* Ouvrir une invite de commande
+* Placer vous dans le dossier téléchargé
+* Executer la commande suivante : mvn spring-boot:run
+
+via un IDE :
+* Importer le projet
+* Lancer le fichier Application. java situé dans src/main/java/fr/mim/gamestoreAPI/
 
 ## Utilisation
 
