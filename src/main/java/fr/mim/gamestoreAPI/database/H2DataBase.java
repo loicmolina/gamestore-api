@@ -96,10 +96,8 @@ public class H2DataBase {
 			throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
 		connectionToDatabase();
 		Set<Jeu> jeux = new HashSet<>();
-		ResultSet rs = null;
-		try {
-			StringBuilder sql = new StringBuilder("SELECT * FROM MAGASIN");
-			rs = stmt.executeQuery(sql.toString());
+		StringBuilder sql = new StringBuilder("SELECT * FROM MAGASIN");
+		try (ResultSet rs = stmt.executeQuery(sql.toString());){
 			while (rs.next()) {
 				Jeu jeu = new Jeu();
 				jeu.setId(rs.getLong("id"));
@@ -110,7 +108,6 @@ public class H2DataBase {
 				jeu.setGenre2(rs.getString("genre2"));
 				jeux.add(jeu);
 			}
-			rs.close();
 		} catch (Exception e) {
 			LOGGER.log(Level.WARNING, e.getMessage());
 		} finally {
