@@ -3,6 +3,8 @@ package fr.mim.gamestoreAPI;
 import static org.junit.Assert.*;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -52,11 +54,18 @@ public class RechercheTests {
 		
 		//When
 		ArrayList<Jeu> resultat = magasin.rechercheJeux("Mario");
+		Collections.sort(resultat, new Comparator<Jeu>() {
+	        @Override
+	        public int compare(Jeu jeu1, Jeu jeu2)
+	        {
+	            return  jeu1.getNom().compareTo(jeu2.getNom());
+	        }
+	    });
 		
 		//Then
 		assertEquals(resultat.size(),2);
-		assertEquals(resultat.get(0).getNom(),jeu.getNom());
-		assertEquals(resultat.get(1).getNom(),jeu2.getNom());
+		assertEquals(resultat.get(0).getNom(),jeu2.getNom());
+		assertEquals(resultat.get(1).getNom(),jeu.getNom());
 	}
 	
 	@Test

@@ -40,9 +40,6 @@ public class H2DataBase {
 			
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
-		}
-		finally{
-			con.close();
 		}		
 	}
 	
@@ -99,9 +96,6 @@ public class H2DataBase {
 			}
 		} catch(Exception e) {
 			System.err.println(e.getMessage());
-		}
-		finally{
-			rs.close();
 		}
 		return jeux;	
 	}
