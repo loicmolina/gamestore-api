@@ -27,8 +27,8 @@ public class TestRecherche {
 		
 		ArrayList<Jeu> resultat = (ArrayList<Jeu>) magasin.rechercheJeux("Tekken");
 		
-		assertEquals(resultat.size(),1);
-		assertEquals(resultat.get(0).getNom(),jeu.getNom());
+		assertEquals(1, resultat.size());
+		assertEquals(jeu.getNom(), resultat.get(0).getNom());
 	}
 	
 	@Test
@@ -54,9 +54,9 @@ public class TestRecherche {
 	        }
 	    });
 		
-		assertEquals(resultat.size(),2);
-		assertEquals(resultat.get(0).getNom(),jeu2.getNom());
-		assertEquals(resultat.get(1).getNom(),jeu.getNom());
+		assertEquals(2, resultat.size());
+		assertEquals(jeu2.getNom(), resultat.get(0).getNom());
+		assertEquals(jeu.getNom(), resultat.get(1).getNom());
 	}
 	
 	@Test
@@ -68,7 +68,7 @@ public class TestRecherche {
 		
 		ArrayList<Jeu> resultat = (ArrayList<Jeu>) magasin.rechercheJeux("Metroid");
 		
-		assertEquals(resultat.size(),0);
+		assertEquals(0, resultat.size());
 	}
 
 }
