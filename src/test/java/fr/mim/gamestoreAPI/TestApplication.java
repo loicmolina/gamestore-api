@@ -8,14 +8,15 @@ import org.junit.Test;
 public class TestApplication {
 
 	@Test
-	public void testApplicationHorsLigne(){
-		assertNull(Application.run);
+	public void testApplicationHorsLigne() {		
+		assertNull(new Application().getRun());
 	}
 	
 	@Test
 	public void testApplicationEnLigne(){
-		Application.runApplication();
-		assertTrue(Application.run.isRunning());
-		Application.exitApplication();
+		Application application = new Application();
+		application.runApplication();
+		assertTrue(application.getRun().isRunning());
+		application.exitApplication();
 	}
 }

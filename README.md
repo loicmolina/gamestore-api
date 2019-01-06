@@ -24,32 +24,15 @@ via un IDE :
 
 [Documentation Swagger](https://app.swaggerhub.com/apis-docs/loicmolina1/gamestore-API/0.1)
 
-Chaque requête doit commencer avec l'URI suivant : localhost:8080/magasin/jeux
+Chaque requête doit commencer avec l'URI suivant : localhost:8080/magasin/
 
-Les jeux se composent des éléments suivants:
+## Modification du code
 
-### Structure d'un jeu :
-* Un nom
-* Une date de sortie au format jj/mm/aaaa
-* Un developpeur
-* Un premier genre
-* Un second genre
+Toute modification du code ne peut se faire sur les branches master ou develop. Il faut donc créer une branch par fonctionnalité depuis la branch develop.
 
-Les différents attributs sont tous optionnels. Un ID leur sera affecté leur sera affecté lors de leur entrée dans la base.
+Pour cela, on s'assure de se placer tout d'abord sur la branch develop avec la commande git checkout -b 
+avec la commande "*git checkout develop*", puis, on utilise la commande "*git checkout -b {nom de la branch}*" pour créer une branche personnelle. Toute modification se fera sur celle-ci.
 
-Voici les différentes requêtes utilisables de cette API :
+Une fois le code commit et push, il fera l'objet d'un pull request vers la branch develop où le code sera review et validé par un autre developpeur avec d'être merge vers cette dernière. Une fois la feature validée, on se replace sur la develop et on recréé une branche pour une nouvelle feature.
 
-### Get
-* localhost:8080/magasin/jeux : retourne tout les jeux disponibles dans le magasin
-* localhost:8080/magasin/jeux/[ID] : retourne tout les jeux disponibles dans le magasin
-* localhost:8080/magasin/recherche/[mot] : recherche les jeux du magasin portant un nom contenant le mot indiqué dans l'URI
-
-### Post
-* localhost:8080/magasin/jeux + Requête JSON : ajoute un nouveau jeu dans le magasin 
-
-### Put
-* localhost:8080/magasin/jeux/[ID] + Requête JSON : modifie un jeu portant l'id inscrit dans le magasin
-
-### Delete
-* localhost:8080/magasin/jeux : supprime tout les jeux disponibles dans le magasin
-* localhost:8080/magasin/jeux/[ID] : supprime le jeu portant l'id inscrit du magasin
+Si le build Jenkins ne comporte aucune erreur sur la branch develop, il sera merge vers la branch master.
