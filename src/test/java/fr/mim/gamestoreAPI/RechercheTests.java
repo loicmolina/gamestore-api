@@ -20,31 +20,24 @@ public class RechercheTests {
 
 	@Test
 	public void testRechercheSimple() throws Exception {
-		//Given
 		Magasin magasin = new Magasin(false);
 		Jeu jeu = new Jeu();
-		jeu.setNom("Tekken 5");		
-		
+		jeu.setNom("Tekken 5");				
 		magasin.addJeuLocal(jeu);
 		
-		//When
 		ArrayList<Jeu> resultat = magasin.rechercheJeux("Tekken");
 		
-		//Then
 		assertEquals(resultat.size(),1);
 		assertEquals(resultat.get(0).getNom(),jeu.getNom());
 	}
 	
 	@Test
 	public void testRechercheMultiple() throws Exception {
-		//Given
 		Magasin magasin = new Magasin(false);
 		Jeu jeu = new Jeu();
-		jeu.setNom("Super Mario Bros.");	
-		
+		jeu.setNom("Super Mario Bros.");			
 		Jeu jeu2 = new Jeu();
-		jeu2.setNom("Mario Odyssey");		
-
+		jeu2.setNom("Mario Odyssey");	
 		Jeu jeu3 = new Jeu();
 		jeu3.setNom("Overwatch");		
 		
@@ -52,7 +45,6 @@ public class RechercheTests {
 		magasin.addJeuLocal(jeu2);
 		magasin.addJeuLocal(jeu3);
 		
-		//When
 		ArrayList<Jeu> resultat = magasin.rechercheJeux("Mario");
 		Collections.sort(resultat, new Comparator<Jeu>() {
 	        @Override
@@ -62,7 +54,6 @@ public class RechercheTests {
 	        }
 	    });
 		
-		//Then
 		assertEquals(resultat.size(),2);
 		assertEquals(resultat.get(0).getNom(),jeu2.getNom());
 		assertEquals(resultat.get(1).getNom(),jeu.getNom());
@@ -70,17 +61,13 @@ public class RechercheTests {
 	
 	@Test
 	public void testRechercheVide() throws Exception {
-		//Given
 		Magasin magasin = new Magasin(false);
 		Jeu jeu = new Jeu();
-		jeu.setNom("NieR : Automata");		
-		
+		jeu.setNom("NieR : Automata");				
 		magasin.addJeuLocal(jeu);
 		
-		//When
 		ArrayList<Jeu> resultat = magasin.rechercheJeux("Metroid");
 		
-		//Then
 		assertEquals(resultat.size(),0);
 	}
 

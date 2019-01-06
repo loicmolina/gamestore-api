@@ -35,8 +35,7 @@ public class Magasin {
 		jeux.add(jeu);
 	}
 
-	private void addJeuBDD(Jeu jeu)
-			throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+	private void addJeuBDD(Jeu jeu) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
 		database.insertValue(jeu);
 	}
 

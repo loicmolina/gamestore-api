@@ -3,6 +3,8 @@ package fr.mim.gamestoreAPI.controleurs;
 import java.util.ArrayList;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,12 +14,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import fr.mim.gamestoreAPI.database.H2DataBase;
 import fr.mim.gamestoreAPI.modele.Jeu;
 import fr.mim.gamestoreAPI.modele.Magasin;
 
 @RestController
 public class JeuControlleur{
 	private final static AtomicInteger counter = new AtomicInteger();
+	private final static Logger LOGGER = Logger.getLogger(JeuControlleur.class.getName());
 	
 	private static final String TEMPLATEJEUAJOUTE = "Le jeu %s a été ajouté !";
 	private static final String TEMPLATEJEUDEJAPRESENT = "Un jeu possédant l'id %d existe déjà !";
@@ -34,7 +38,7 @@ public class JeuControlleur{
 			magasin = new Magasin(true);
 			counter.set(magasin.getJeux().size());
 		} catch (Exception e) {
-			e.printStackTrace();
+			LOGGER.log(Level.WARNING, e.getMessage());
 		}
 	}
 	
