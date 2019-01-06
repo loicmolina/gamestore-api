@@ -57,7 +57,7 @@ public class H2DataBase {
 	}
 
 	public void connectionToDatabase() throws SQLException{
-		con = DriverManager.getConnection("jdbc:h2:" + "./database/dataFile", "", "");
+		con = DriverManager.getConnection("jdbc:h2:" + "./database/dataFile", "root", "");
 	}
 
 	public void closeConnectionToDatabase() throws SQLException {
