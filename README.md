@@ -21,5 +21,4 @@ Via une invite de commande :
 Via un IDE (Eclipse par exemple) :
 * Importer le projet dans Eclipse (File > Import > Existing Maven Projects) en selectionnant le dossier du projet précédemment cloné :
 
-![](/images/CaptureExisting.PNG)
 * Lancer le fichier Application. java situé dans `src/main/java/fr/mim/gamestoreAPI/`
