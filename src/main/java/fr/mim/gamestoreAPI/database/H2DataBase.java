@@ -17,14 +17,14 @@ public class H2DataBase {
 	private static boolean connected;
 	private Statement stmt;
 	private Connection con;
-
-	public H2DataBase() {
+	
+	public H2DataBase(){
 		stmt = null;
 		con = null;
 	}
 
 	public void createDataBase()
-			throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+			throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException{
 		try {
 			connectionToDatabase();
 			stmt = con.createStatement();
@@ -34,31 +34,28 @@ public class H2DataBase {
 					+ "genre2 VARCHAR(255)," + "PRIMARY KEY (id))";
 
 			stmt.executeUpdate(sql);
-			//NOSONAR
 			connected = true;
 			LOGGER.log(Level.FINE, "Table created");
 
 		} catch (SQLException e) {
-			//NOSONAR
 			connected = false;
 			LOGGER.log(Level.WARNING, e.getMessage());
 		}
-
+		
 		Runtime.getRuntime().addShutdownHook(new Thread(new Runnable() {
-			public void run() {
-				try {
-					if (connected) {
-						closeConnectionToDatabase();
-					}
+		    public void run() {
+		        try {
+		        	if (connected){
+						closeConnectionToDatabase();		        		
+		        	}
 				} catch (SQLException e) {
 					LOGGER.log(Level.WARNING, e.getMessage());
 				}
-			}
+		    }
 		}));
 	}
 
-	public void connectionToDatabase() throws SQLException {
-		//NOSONAR
+	public void connectionToDatabase() throws SQLException{
 		con = DriverManager.getConnection("jdbc:h2:" + "./database/dataFile", "root", "password");
 	}
 
@@ -66,7 +63,8 @@ public class H2DataBase {
 		con.close();
 	}
 
-	public void insertValue(Jeu jeu) throws SQLException {
+	public void insertValue(Jeu jeu)
+			throws SQLException{
 		if (connected) {
 			String separateur = "\',\'";
 			try {
@@ -74,16 +72,17 @@ public class H2DataBase {
 						+ Long.toString(jeu.getId()) + ",\'" + jeu.getNom() + separateur + jeu.getDateSortie()
 						+ separateur + jeu.getDeveloppeur() + separateur + jeu.getGenre1() + separateur
 						+ jeu.getGenre2() + "\')";
-				//NOSONAR
+
 				stmt.executeUpdate(sql);
 
 			} catch (SQLException e) {
 				LOGGER.log(Level.WARNING, e.getMessage());
-			}
+			} 
 		}
 	}
 
-	public void deleteValue(Jeu jeu) throws SQLException {
+	public void deleteValue(Jeu jeu)
+			throws SQLException{
 		if (connected) {
 			connectionToDatabase();
 			try {
@@ -91,28 +90,30 @@ public class H2DataBase {
 				sql.append(Long.toString(jeu.getId()));
 				stmt.executeUpdate(sql.toString());
 
-			} catch (SQLException e) {
+			} catch (SQLException e ){
 				LOGGER.log(Level.WARNING, e.getMessage());
-			}
+			} 
 		}
 	}
 
-	public void deleteValues() throws SQLException {
+	public void deleteValues()
+			throws SQLException{
 		if (connected) {
 			try {
 				String sql = "DELETE FROM MAGASIN";
 				stmt.executeUpdate(sql);
 			} catch (SQLException e) {
 				LOGGER.log(Level.WARNING, e.getMessage());
-			}
+			} 
 		}
 	}
 
-	public Set<Jeu> getValues() throws SQLException {
+	public Set<Jeu> getValues()
+			throws SQLException{
 		Set<Jeu> jeux = new HashSet<>();
 		if (connected) {
 			String sql = "SELECT * FROM MAGASIN";
-			try (ResultSet rs = stmt.executeQuery(sql);) {
+			try (ResultSet rs = stmt.executeQuery(sql);) {		
 				while (rs.next()) {
 					Jeu jeu = new Jeu();
 					jeu.setId(rs.getLong("id"));
@@ -125,12 +126,12 @@ public class H2DataBase {
 				}
 			} catch (SQLException e) {
 				LOGGER.log(Level.WARNING, e.getMessage());
-			}
+			} 
 		}
 		return jeux;
 	}
 
-	public static boolean isDatabaseUp() {
+	public static boolean isDatabaseUp(){
 		return connected;
 	}
 }
