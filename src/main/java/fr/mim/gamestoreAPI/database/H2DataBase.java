@@ -57,7 +57,7 @@ public class H2DataBase {
 	}
 
 	public void connectionToDatabase() throws SQLException{
-		con = DriverManager.getConnection("jdbc:h2:" + "./database/dataFile", "root", "password");
+		con = DriverManager.getConnection("jdbc:h2:" + "./database/dataFile", "", "");
 	}
 
 	public void closeConnectionToDatabase() throws SQLException {
@@ -67,8 +67,9 @@ public class H2DataBase {
 	public void insertValue(Jeu jeu)
 			throws SQLException{
 		if (connected) {
+			PreparedStatement sql = null;
 			try {
-				PreparedStatement sql = con.prepareStatement("INSERT INTO MAGASIN(id,nom,dateSortie,developpeur,genre1,genre2) values (?, ?, ?, ?, ?, ?)");
+				sql = con.prepareStatement("INSERT INTO MAGASIN(id,nom,dateSortie,developpeur,genre1,genre2) values (?, ?, ?, ?, ?, ?)");
 				sql.setString(1, Long.toString(jeu.getId()));
 				sql.setString(2, jeu.getNom());
 				sql.setString(3, jeu.getDateSortie());
@@ -79,6 +80,8 @@ public class H2DataBase {
 				con.commit();
 			} catch (SQLException e) {
 				LOGGER.log(Level.WARNING, e.getMessage());
+			} finally {
+				sql.close();
 			}
 		}
 	}
@@ -128,7 +131,7 @@ public class H2DataBase {
 				}
 			} catch (SQLException e) {
 				LOGGER.log(Level.WARNING, e.getMessage());
-			} 
+			}
 		}
 		return jeux;
 	}
