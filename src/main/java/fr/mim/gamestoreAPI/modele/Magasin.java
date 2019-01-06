@@ -11,11 +11,10 @@ import fr.mim.gamestoreAPI.utils.TextUtils;
 
 public class Magasin {
 	private Set<Jeu> jeux;
-	private boolean online;
+	private boolean online = false;
 	private static H2DataBase database = new H2DataBase();
 
-	public Magasin(boolean recuperationDonnees)
-			throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException {
+	public Magasin(boolean recuperationDonnees) throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException {
 		jeux = new HashSet<>();
 		if (recuperationDonnees) {
 			online = true;
@@ -24,8 +23,7 @@ public class Magasin {
 		}
 	}
 
-	public boolean addJeu(Jeu jeu)
-			throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException {
+	public boolean addJeu(Jeu jeu) throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException {
 		if (getJeuParNom(jeu.getNom()) == null) {
 			addJeuLocal(jeu);
 			if (online) {
@@ -81,9 +79,7 @@ public class Magasin {
 
 	public List<Jeu> rechercheJeux(String nom) {
 		String comparaison = ".*" + TextUtils.normaliser(nom) + ".*";
-		List<Jeu> res = jeux.stream().filter(jeu -> TextUtils.normaliser(jeu.getNom()).matches(comparaison))
-				.collect(Collectors.toList());
-		;
+		List<Jeu> res = jeux.stream().filter(jeu -> TextUtils.normaliser(jeu.getNom()).matches(comparaison)).collect(Collectors.toList());
 
 		return res;
 	}

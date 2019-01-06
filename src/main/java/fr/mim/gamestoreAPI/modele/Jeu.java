@@ -4,11 +4,11 @@ import java.lang.String;
 
 public class Jeu {
 	private long id;
-	private String nom;
-	private String dateSortie;
-	private String developpeur;
-	private String genre1;
-	private String genre2;
+	private String nom = null;
+	private String dateSortie = null;
+	private String developpeur = null;
+	private String genre1 = null;
+	private String genre2 = null;
 	private final static String PATTERNDATE = "\\d{2}/\\d{2}/\\d{4}";
 
 	public Jeu(){	}
