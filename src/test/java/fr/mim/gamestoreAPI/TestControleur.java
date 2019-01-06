@@ -20,10 +20,10 @@ public class TestControleur {
 		jeu.setNom("NieR : Automata");
 		
 		JeuControleur jc = new JeuControleur();
-		jc.restart(false);
+		JeuControleur.restart(false);
 		ResponseEntity<String> ajouterJeu = jc.ajouterJeu(jeu);
 		
-		assertEquals(ajouterJeu.getStatusCode(),HttpStatus.CREATED);
+		assertEquals(HttpStatus.CREATED, ajouterJeu.getStatusCode());
 	}
 	
 	@Test
@@ -32,11 +32,11 @@ public class TestControleur {
 		jeu.setNom("NieR : Automata");
 		
 		JeuControleur jc = new JeuControleur();
-		jc.restart(false);
+		JeuControleur.restart(false);
 		jc.ajouterJeu(jeu);
 		ResponseEntity<String> ajouterJeu2 = jc.ajouterJeu(jeu);
 		
-		assertEquals(ajouterJeu2.getStatusCode(),HttpStatus.CONFLICT);
+		assertEquals(HttpStatus.CONFLICT, ajouterJeu2.getStatusCode());
 	}
 	
 	@Test
@@ -46,10 +46,10 @@ public class TestControleur {
 		jeu.setDateSortie("15/11/17");
 		
 		JeuControleur jc = new JeuControleur();
-		jc.restart(false);
+		JeuControleur.restart(false);
 		ResponseEntity<String> ajouterJeu = jc.ajouterJeu(jeu);
 		
-		assertEquals(ajouterJeu.getStatusCode(),HttpStatus.BAD_REQUEST);
+		assertEquals(HttpStatus.BAD_REQUEST, ajouterJeu.getStatusCode());
 	}
 	
 	@Test
@@ -58,11 +58,11 @@ public class TestControleur {
 		jeu.setNom("NieR : Automata");
 		
 		JeuControleur jc = new JeuControleur();
-		jc.restart(false);
+		JeuControleur.restart(false);
 		jc.ajouterJeu(jeu);
 		ResponseEntity<?> jeuxParId = jc.getJeuxParId(0);
 		
-		assertEquals(jeuxParId.getStatusCode(),HttpStatus.OK);
+		assertEquals(HttpStatus.OK, jeuxParId.getStatusCode());
 	}
 	
 	@Test
@@ -71,10 +71,10 @@ public class TestControleur {
 		jeu.setNom("NieR : Automata");
 		
 		JeuControleur jc = new JeuControleur();
-		jc.restart(false);
+		JeuControleur.restart(false);
 		ResponseEntity<?> jeuxParId = jc.getJeuxParId(0);
 		
-		assertEquals(jeuxParId.getStatusCode(),HttpStatus.NOT_FOUND);
+		assertEquals(HttpStatus.NOT_FOUND, jeuxParId.getStatusCode());
 	}
 	
 	@Test
@@ -83,11 +83,11 @@ public class TestControleur {
 		jeu.setNom("NieR : Automata");
 		
 		JeuControleur jc = new JeuControleur();
-		jc.restart(false);
+		JeuControleur.restart(false);
 		jc.ajouterJeu(jeu);
 		ResponseEntity<String> supprimerJeu = jc.deleteJeu(0);
 		
-		assertEquals(supprimerJeu.getStatusCode(),HttpStatus.OK);
+		assertEquals(HttpStatus.OK, supprimerJeu.getStatusCode());
 	}
 	
 	@Test
@@ -96,10 +96,10 @@ public class TestControleur {
 		jeu.setNom("NieR : Automata");
 		
 		JeuControleur jc = new JeuControleur();
-		jc.restart(false);
+		JeuControleur.restart(false);
 		ResponseEntity<String> supprimerJeu = jc.deleteJeu(0);
 		
-		assertEquals(supprimerJeu.getStatusCode(),HttpStatus.NOT_FOUND);
+		assertEquals(HttpStatus.NOT_FOUND, supprimerJeu.getStatusCode());
 	}
 	
 	@Test
@@ -111,11 +111,11 @@ public class TestControleur {
 		jeumodifie.setNom("NieR : Automata");
 		
 		JeuControleur jc = new JeuControleur();
-		jc.restart(false);
+		JeuControleur.restart(false);
 		jc.ajouterJeu(jeu);
 		ResponseEntity<String> modifierJeu = jc.modifierJeu(jeumodifie, 0);
 		
-		assertEquals(modifierJeu.getStatusCode(),HttpStatus.OK);
+		assertEquals(HttpStatus.OK, modifierJeu.getStatusCode());
 	}
 	
 	@Test
@@ -127,10 +127,10 @@ public class TestControleur {
 		jeumodifie.setNom("NieR : Automata");
 		
 		JeuControleur jc = new JeuControleur();
-		jc.restart(false);
+		JeuControleur.restart(false);
 		ResponseEntity<String> modifierJeu = jc.modifierJeu(jeumodifie, 0);
 		
-		assertEquals(modifierJeu.getStatusCode(),HttpStatus.NOT_FOUND);
+		assertEquals(HttpStatus.NOT_FOUND, modifierJeu.getStatusCode());
 	}
 	
 	@Test
@@ -142,13 +142,13 @@ public class TestControleur {
 		jeu2.setNom("NieR : Automata");
 		
 		JeuControleur jc = new JeuControleur();
-		jc.restart(false);
+		JeuControleur.restart(false);
 		jc.ajouterJeu(jeu);
 		jc.ajouterJeu(jeu2);
 		ResponseEntity<Set<Jeu>> jeux = jc.getJeux();
 		
-		assertEquals(jeux.getStatusCode(),HttpStatus.OK);
-		assertEquals(jeux.getBody().size(),2);
+		assertEquals(HttpStatus.OK, jeux.getStatusCode());
+		assertEquals(2, jeux.getBody().size());
 	}
 	
 	@Test
@@ -157,11 +157,11 @@ public class TestControleur {
 		jeu.setNom("Metroid Prime");
 		
 		JeuControleur jc = new JeuControleur();
-		jc.restart(false);
+		JeuControleur.restart(false);
 		jc.ajouterJeu(jeu);
 		ResponseEntity<String> supprimerJeux = jc.deleteJeux();
 		
-		assertEquals(supprimerJeux.getStatusCode(),HttpStatus.OK);
+		assertEquals(HttpStatus.OK, supprimerJeux.getStatusCode());
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -174,12 +174,12 @@ public class TestControleur {
 		jeu2.setNom("Super Mario");
 		
 		JeuControleur jc = new JeuControleur();
-		jc.restart(false);
+		JeuControleur.restart(false);
 		jc.ajouterJeu(jeu);
 		jc.ajouterJeu(jeu2);
 		ResponseEntity<Object> jeux = jc.rechercheJeux("metroid");
 		
-		assertEquals(jeux.getStatusCode(),HttpStatus.OK);
-		assertEquals(((ArrayList<Jeu>) jeux.getBody()).size(), 1);
+		assertEquals(HttpStatus.OK, jeux.getStatusCode());
+		assertEquals(1, ((ArrayList<Jeu>) jeux.getBody()).size());
 	}
 }

@@ -12,10 +12,11 @@ import fr.mim.gamestoreAPI.utils.TextUtils;
 
 public class Magasin {
 	private Set<Jeu> jeux;
-	private boolean online = false;
+	private boolean online;
 	private static H2DataBase database = new H2DataBase();
 
-	public Magasin(boolean recuperationDonnees) throws Exception {
+	public Magasin(boolean recuperationDonnees)
+			throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException {
 		jeux = new HashSet<>();
 		if (recuperationDonnees) {
 			online = true;
@@ -24,7 +25,8 @@ public class Magasin {
 		}
 	}
 
-	public boolean addJeu(Jeu jeu) throws Exception {
+	public boolean addJeu(Jeu jeu)
+			throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException {
 		if (getJeuParNom(jeu.getNom()) == null) {
 			addJeuLocal(jeu);
 			if (online) {
@@ -39,8 +41,7 @@ public class Magasin {
 		jeux.add(jeu);
 	}
 
-	private void addJeuBDD(Jeu jeu)
-			throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+	private void addJeuBDD(Jeu jeu) throws SQLException {
 		database.insertValue(jeu);
 	}
 
@@ -60,7 +61,7 @@ public class Magasin {
 		return jeux.contains(jeu);
 	}
 
-	public boolean deleteJeu(long id) throws Exception {
+	public boolean deleteJeu(long id) throws SQLException {
 		Jeu jeu = this.getJeuParId(id);
 		if (jeu != null) {
 			jeux.remove(jeu);
@@ -72,19 +73,19 @@ public class Magasin {
 		return false;
 	}
 
-	public void deleteJeux() throws Exception {
+	public void deleteJeux() throws SQLException {
 		if (online) {
 			database.deleteValues();
 		}
 		jeux.clear();
 	}
 
-	public ArrayList<Jeu> rechercheJeux(String nom) {
+	public List<Jeu> rechercheJeux(String nom) {
 		String comparaison = ".*" + TextUtils.normaliser(nom) + ".*";
 		List<Jeu> res = jeux.stream().filter(jeu -> TextUtils.normaliser(jeu.getNom()).matches(comparaison))
 				.collect(Collectors.toList());
 		;
 
-		return (ArrayList<Jeu>) res;
+		return res;
 	}
 }

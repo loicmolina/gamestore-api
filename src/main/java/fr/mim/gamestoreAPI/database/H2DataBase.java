@@ -14,12 +14,17 @@ import fr.mim.gamestoreAPI.modele.Jeu;
 
 public class H2DataBase {
 	private static final Logger LOGGER = Logger.getLogger(H2DataBase.class.getName());
-	private static boolean CONNECTED = false;
+	private static boolean connected;
 	private Statement stmt;
 	private Connection con;
 
+	public H2DataBase() {
+		stmt = null;
+		con = null;
+	}
+
 	public void createDataBase()
-			throws SQLException, InstantiationException, IllegalAccessException, ClassNotFoundException {
+			throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
 		try {
 			connectionToDatabase();
 			stmt = con.createStatement();
@@ -29,29 +34,28 @@ public class H2DataBase {
 					+ "genre2 VARCHAR(255)," + "PRIMARY KEY (id))";
 
 			stmt.executeUpdate(sql);
-			CONNECTED = true;
+			connected = true;
 			LOGGER.log(Level.FINE, "Table created");
 
-		} catch (Exception e) {
-			CONNECTED = false;
+		} catch (SQLException e) {
+			connected = false;
 			LOGGER.log(Level.WARNING, e.getMessage());
 		}
-		
+
 		Runtime.getRuntime().addShutdownHook(new Thread(new Runnable() {
-		    public void run() {
-		        try {
-		        	if (CONNECTED){
-						closeConnectionToDatabase();		        		
-		        	}
+			public void run() {
+				try {
+					if (connected) {
+						closeConnectionToDatabase();
+					}
 				} catch (SQLException e) {
 					LOGGER.log(Level.WARNING, e.getMessage());
 				}
-		    }
+			}
 		}));
 	}
 
-	public void connectionToDatabase()
-			throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException {
+	public void connectionToDatabase() throws SQLException {
 		con = DriverManager.getConnection("jdbc:h2:" + "./database/dataFile", "root", "password");
 	}
 
@@ -59,9 +63,8 @@ public class H2DataBase {
 		con.close();
 	}
 
-	public void insertValue(Jeu jeu)
-			throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
-		if (CONNECTED) {
+	public void insertValue(Jeu jeu) throws SQLException {
+		if (connected) {
 			String separateur = "\',\'";
 			try {
 				String sql = "INSERT INTO MAGASIN(id,nom,dateSortie,developpeur,genre1,genre2) values ("
@@ -71,45 +74,42 @@ public class H2DataBase {
 
 				stmt.executeUpdate(sql);
 
-			} catch (Exception e) {
+			} catch (SQLException e) {
 				LOGGER.log(Level.WARNING, e.getMessage());
-			} 
+			}
 		}
 	}
 
-	public void deleteValue(Jeu jeu)
-			throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
-		if (CONNECTED) {
+	public void deleteValue(Jeu jeu) throws SQLException {
+		if (connected) {
 			connectionToDatabase();
 			try {
 				StringBuilder sql = new StringBuilder("DELETE FROM MAGASIN WHERE id = ");
 				sql.append(Long.toString(jeu.getId()));
 				stmt.executeUpdate(sql.toString());
 
-			} catch (Exception e) {
+			} catch (SQLException e) {
 				LOGGER.log(Level.WARNING, e.getMessage());
-			} 
+			}
 		}
 	}
 
-	public void deleteValues()
-			throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
-		if (CONNECTED) {
+	public void deleteValues() throws SQLException {
+		if (connected) {
 			try {
 				String sql = "DELETE FROM MAGASIN";
 				stmt.executeUpdate(sql);
-			} catch (Exception e) {
+			} catch (SQLException e) {
 				LOGGER.log(Level.WARNING, e.getMessage());
-			} 
+			}
 		}
 	}
 
-	public Set<Jeu> getValues()
-			throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+	public Set<Jeu> getValues() throws SQLException {
 		Set<Jeu> jeux = new HashSet<>();
-		if (CONNECTED) {
+		if (connected) {
 			String sql = "SELECT * FROM MAGASIN";
-			try (ResultSet rs = stmt.executeQuery(sql);) {		
+			try (ResultSet rs = stmt.executeQuery(sql);) {
 				while (rs.next()) {
 					Jeu jeu = new Jeu();
 					jeu.setId(rs.getLong("id"));
@@ -120,14 +120,14 @@ public class H2DataBase {
 					jeu.setGenre2(rs.getString("genre2"));
 					jeux.add(jeu);
 				}
-			} catch (Exception e) {
+			} catch (SQLException e) {
 				LOGGER.log(Level.WARNING, e.getMessage());
-			} 
+			}
 		}
 		return jeux;
 	}
 
-	public static boolean isDatabaseUp(){
-		return CONNECTED;
+	public static boolean isDatabaseUp() {
+		return connected;
 	}
 }

@@ -25,7 +25,7 @@ public class TestRecherche {
 		jeu.setNom("Tekken 5");				
 		magasin.addJeuLocal(jeu);
 		
-		ArrayList<Jeu> resultat = magasin.rechercheJeux("Tekken");
+		ArrayList<Jeu> resultat = (ArrayList<Jeu>) magasin.rechercheJeux("Tekken");
 		
 		assertEquals(resultat.size(),1);
 		assertEquals(resultat.get(0).getNom(),jeu.getNom());
@@ -45,7 +45,7 @@ public class TestRecherche {
 		magasin.addJeuLocal(jeu2);
 		magasin.addJeuLocal(jeu3);
 		
-		ArrayList<Jeu> resultat = magasin.rechercheJeux("Mario");
+		ArrayList<Jeu> resultat = (ArrayList<Jeu>) magasin.rechercheJeux("Mario");
 		Collections.sort(resultat, new Comparator<Jeu>() {
 	        @Override
 	        public int compare(Jeu jeu1, Jeu jeu2)
@@ -66,7 +66,7 @@ public class TestRecherche {
 		jeu.setNom("NieR : Automata");				
 		magasin.addJeuLocal(jeu);
 		
-		ArrayList<Jeu> resultat = magasin.rechercheJeux("Metroid");
+		ArrayList<Jeu> resultat = (ArrayList<Jeu>) magasin.rechercheJeux("Metroid");
 		
 		assertEquals(resultat.size(),0);
 	}
