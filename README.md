@@ -56,7 +56,6 @@ Chaque build peut se lancer manuellement, ou après 5 minutes à la suite de cha
 
 L’analyse du code est visible depuis [SonarQube](http://51.38.48.230:9000/dashboard?id=fr.mim%3Agamestore-API). Chaque métrique permette ainsi de visualiser la qualité du code analysée en trouvant de possibles bugs ou vulnérabilités, mais aussi en signalant des mauvaises pratiques de codage. On peut également y visualiser si on le souhaite le pourcentage de couverture du code via nos différents tests au sein de notre application.
 
-
 ## Mise à jour documentation Swagger
 
 Si l’API est amenée à être modifiée ou améliorée avec de nouvelles requêtes, il est nécessaire de mettre à jour sa documentation . Pour ce faire, il faut récupérer le fichier swagger.yaml située à la racine du projet et qui contient le code source de cette documentation. Ensuite, on peut copier ce code source sur un éditeur en ligne tel que [Swagger Editor](https://editor.swagger.io/) et ainsi modifier ou ajouter de nouvelles requêtes.
