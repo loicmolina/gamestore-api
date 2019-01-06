@@ -12,7 +12,7 @@ node {
 	
 	
     stage('checkout') {
-		git branch: 'master', url: 'https://github.com/loicmolina/gamestore-api.git'
+		git branch: 'develop', url: 'https://github.com/loicmolina/gamestore-api.git'
     }
 	 
 	//stage('checkout'){
