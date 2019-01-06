@@ -9,18 +9,21 @@ import org.springframework.context.annotation.ComponentScan;
 @SpringBootApplication
 @ComponentScan(basePackages = { "fr.mim.gamestoreAPI" } )
 public class Application {
-	
-	private final static ConfigurableApplicationContext run = SpringApplication.run(Application.class);
+	private ConfigurableApplicationContext run = null;
 
-    public static void main(String[] args) {
-        runApplication();
-    }
-    
-    public static ConfigurableApplicationContext runApplication(){
-    	return run;
-    }
-    
-    public static int exitApplication(){
-    	return SpringApplication.exit(run, (ExitCodeGenerator) () -> 0);
-    }
+	public static void main(String[] args) {
+		new Application().runApplication();
+	}
+
+	public void runApplication() {
+		run = SpringApplication.run(Application.class);
+	}
+
+	public int exitApplication() {
+		return SpringApplication.exit(run, (ExitCodeGenerator) () -> 0);
+	}
+
+	public ConfigurableApplicationContext getRun() {
+		return run;
+	}
 }
