@@ -58,6 +58,7 @@ node {
             sh "./mvnw verify -Pprod -DskipTests"
             archiveArtifacts artifacts: '**/target/*.jar', fingerprint: true
         }
+		
     }
 		
     stage('build docker') {
@@ -91,5 +92,9 @@ node {
 		// démarrage de l'image et configuration pour qu'elle se connecte à spring boot admin
 		// qui est dans le réseau springadmin 
 		sh "docker run -d --name ${imageName} --net=springadmin -e _JAVA_OPTIONS=\"-Dspring.boot.admin.client.url=http://spring-boot-admin:8080\" -p 8011:8080 fac/${imageName}:latest"		
+	}
+			
+	stage('cleanup') {
+		cleanWs()
 	}
 }
