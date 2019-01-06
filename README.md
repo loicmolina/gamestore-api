@@ -59,6 +59,6 @@ L’analyse du code est visible depuis [SonarQube](http://51.38.48.230:9000/dash
 
 ## Mise à jour documentation Swagger
 
-Si l’API est amenée à être modifiée ou améliorée avec de nouvelles requêtes, il est nécessaire de mettre à jour la documentation de l’API. Pour ce faire, il faut récupérer le fichier swagger.yaml située à la racine du projet et qui contient le code source de cette documentation. Ensuite, on peut copier ce code source sur un éditeur en ligne tel que [Swagger Editor](https://editor.swagger.io/) et ainsi modifier ou ajouter de nouvelles requêtes.
+Si l’API est amenée à être modifiée ou améliorée avec de nouvelles requêtes, il est nécessaire de mettre à jour sa documentation . Pour ce faire, il faut récupérer le fichier swagger.yaml située à la racine du projet et qui contient le code source de cette documentation. Ensuite, on peut copier ce code source sur un éditeur en ligne tel que [Swagger Editor](https://editor.swagger.io/) et ainsi modifier ou ajouter de nouvelles requêtes.
 
 Après avoir push le fichier mis à jour sur git, il faut signaler ce changement à un administrateur du projet pour que ce dernier mette à jour la doc en ligne disponible sur [SwaggerHub](https://app.swaggerhub.com/apis-docs/loicmolina1/Gamestore-api/1.0.0).
