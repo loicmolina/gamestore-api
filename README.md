@@ -38,12 +38,12 @@ Toute modification du code ne peut se faire sur les branches master ou develop. 
 
 Pour cela, on s'assure de se placer sur la branche develop avec la commande `git checkout develop`, puis, on utilise la commande `git checkout -b {nom de la branch}` pour créer une branche personnelle. Toute modification se fera sur celle-ci.
 
-Lorsque le dévelopement est terminé et que tous les fichiés sont modifiés, il faut envoyer ces modifications vers la branche locale. Exécutez la commande `git add -a` pour prendre en compte les fichiers puis `git commit -m "nom du commit"` pour transmettre le commit. Il est important de bien respecter les règles conventionnelles de nomage des commit : 
+Lorsque le dévelopement de la feature est terminé et que tous les fichiés ont été modifiés, il faut envoyer ces modifications vers la branche locale. Exécutez la commande `git add -a` pour prendre en compte les fichiers puis `git commit -m "nom du commit"` pour créer le commit. Il est important de bien respecter les règles conventionnelles de nomage des commit : 
   * Décrire l’intention et non la technique
   * Inclure le numéro de bug/feature
   * Pas de gags
   * N’oubliez pas que le message est là pour être lu
 
-Une fois le code commit et push, il fera l'objet d'un pull request vers la branch develop où le code sera review et validé par un autre developpeur avec d'être merge vers cette dernière. Une fois la feature validée, on se replace sur la develop et on recréé une branche pour une nouvelle feature.
+Une fois le code commit créé, il faut utiliser la commande `git push` pour le transmettre. Ces modifications feront l'objet d'un pull request vers la branche develop où le code sera relu et validé par un autre developpeur avant d'être fusionné (merge) vers cette dernière. La branche locale peut maintenant être supprimée. Une nouvelle branche locale tirée de dévelop devra être créée pour chaque nouvelle fearure développée.
 
-Si le build Jenkins ne comporte aucune erreur sur la branch develop, il sera merge vers la branch master.
+A titre indicatif, si le build Jenkins ne comporte aucune erreur sur la branch develop, l'équipe pourra alors merge cette branche vers la branche master afin de produire une nouvelle release.
