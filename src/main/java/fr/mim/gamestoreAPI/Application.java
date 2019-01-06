@@ -9,15 +9,15 @@ import org.springframework.context.annotation.ComponentScan;
 @SpringBootApplication
 @ComponentScan(basePackages = { "fr.mim.gamestoreAPI" } )
 public class Application {
-	//NOSONAR
-	public static ConfigurableApplicationContext run;
+	
+	private final static ConfigurableApplicationContext run = SpringApplication.run(Application.class);
 
     public static void main(String[] args) {
         runApplication();
     }
     
     public static ConfigurableApplicationContext runApplication(){
-    	return Application.run = SpringApplication.run(Application.class);
+    	return run;
     }
     
     public static int exitApplication(){
