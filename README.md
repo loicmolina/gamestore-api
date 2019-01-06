@@ -34,10 +34,11 @@ Chaque requête doit commencer avec l'URI suivant : "localhost:8080/magasin/". [
 
 ## Modification du code
 
-Toute modification du code ne peut se faire sur les branches master ou develop. Il faut donc créer une branch par fonctionnalité depuis la branch develop.
+Toute modification du code ne peut se faire sur les branches master ou develop. Il faut donc créer une branche locale par fonctionnalité depuis la branche develop.
 
-Pour cela, on s'assure de se placer tout d'abord sur la branch develop avec la commande git checkout -b 
-avec la commande "*git checkout develop*", puis, on utilise la commande "*git checkout -b {nom de la branch}*" pour créer une branche personnelle. Toute modification se fera sur celle-ci.
+Pour cela, on s'assure de se placer sur la branche develop avec la commande "*git checkout develop*", puis, on utilise la commande "*git checkout -b {nom de la branch}*" pour créer une branche personnelle. Toute modification se fera sur celle-ci.
+
+Lorsque le dévelopement est terminé et que tous les fichiés sont modifiés, il faut envoyer ces modifications vers la branche locale avec la commande "*git add -a*" pour prendre en compte les fichiers puis "*git commit -m "nom du commit"*" pour transmettre le commit. Il est important de bien respecter les règles conventionnelles de nomage des commit : 
 
 Une fois le code commit et push, il fera l'objet d'un pull request vers la branch develop où le code sera review et validé par un autre developpeur avec d'être merge vers cette dernière. Une fois la feature validée, on se replace sur la develop et on recréé une branche pour une nouvelle feature.
 
