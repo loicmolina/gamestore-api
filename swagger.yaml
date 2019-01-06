@@ -1,0 +1,160 @@
+swagger: "2.0"
+info:
+  title: "Gamestore API"
+  description: "Documentation de l'API Gamestore"
+  version: "0.1"
+  termsOfService: "http://swagger.io/terms/"
+  license:
+    name: "Apache 2.0"
+    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
+host: "gamestoreapi.com"
+basePath: "/"
+tags:
+- name: "jeux"
+  description: "Action sur le magasin de jeux"
+schemes:
+- "https"
+- "http"
+paths:
+  /magasin/jeux:
+    get:
+      tags:
+      - "jeux"
+      summary: "Affiche la liste des tous les jeux"
+      description: Retourne la liste de tout les jeux du magasin
+      responses:
+        '200':
+          description: Les jeux ont bien ete retourne
+          schema:
+            $ref: "#/definitions/Jeu"
+          
+    delete:
+      tags:
+      - "jeux"
+      summary: Supprime tous les jeux
+      description: Supprime tous les jeux du magasin
+      responses:
+        '200':
+          description: Tous les jeux ont été retiré du magasin
+  
+  /magasin/jeux/:
+    parameters:
+     - name: "Jeu"
+       in: "body"
+       description: "Nouveau jeu à ajouter"
+       required: true
+       schema:
+        $ref: "#/definitions/Jeu"
+    post:
+      tags:
+      - "jeux"
+      summary: Ajoute un nouveau jeu
+      description: Insère un nouveau jeu dans le magasin
+      responses:
+        '201':
+          description: Le jeu a bien été ajouté au magasin
+        '400':
+          description: Le JSON fournit comporte un probleme
+        '409':
+          description: Un jeu portant ce nom existe déjà dans le magasin
+          
+  /magasin/jeux/{id}:
+    put:
+      tags:
+      - "jeux"
+      parameters:
+       - name: "id"
+         in: "path"
+         description: "ID d'un jeu"
+         required: true
+         type: "integer"
+         format: "int64"
+       - name: "Jeu"
+         in: "body"
+         description: "Contenu du jeu à modifier"
+         required: true
+         schema:
+          $ref: "#/definitions/Jeu"
+      summary: Modifie un jeu
+      description: Modifie un jeu du magasin
+      responses:
+        '200':
+          description: Le jeu a bien été modifié
+        '404':
+          description: L'ID ne correspond a aucun jeu du magasin
+    get:
+      tags:
+      - "jeux"
+      parameters:
+       - name: "id"
+         in: "path"
+         description: "ID d'un jeu"
+         required: true
+         type: "integer"
+         format: "int64"
+      summary: Recherche un jeu selon son ID
+      description: Recherche un jeu selon son ID
+      responses:
+        '200':
+          description: Les jeux ont bien ete retourne
+          schema:
+            $ref: "#/definitions/Jeu"
+        '404':
+          description: L'ID ne correspond a aucun jeu du magasin
+    delete:
+      tags:
+      - "jeux"
+      parameters:
+       - name: "id"
+         in: "path"
+         description: "ID d'un jeu"
+         required: true
+         type: "integer"
+         format: "int64"
+      summary: Supprime un jeu
+      description: Supprime un jeu selon son ID
+      responses:
+        '200':
+          description: Le jeu a bien été supprimé
+        '404':
+          description: L'ID ne correspond a aucun jeu du magasin
+  
+  /magasin/recherche/{nom}:
+    get:
+      tags:
+      - "jeux"
+      parameters:
+       - name: "nom"
+         in: "path"
+         description: "Nom du jeu à rechercher"
+         required: true
+         type: "string"
+      summary: Recherche un jeu selon son nom
+      description: Recherche tous les jeux du magasin comprenant la chaîne de caracteres
+      responses:
+        '200':
+          description: La liste des jeux correspondant est retournée (même si vide)
+          schema:
+            $ref: "#/definitions/Jeu"
+
+definitions:
+  Jeu:
+    type: "object"
+    required:
+    - "name"
+    properties:
+      name:
+        type: "string"
+        example: "Borderlands"
+      developpeur:
+        type: "string"
+        example: "Gearbox Software"
+      dateSortie:
+        type: "date"
+        format: "jj/mm/aaaa"
+      genre1:
+        type: "string"
+        example: "FPS"
+      genre2:
+        type: "string"
+        example: "RPG"
