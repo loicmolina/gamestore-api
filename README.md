@@ -29,7 +29,10 @@ Chaque requête doit commencer avec l'URI suivant : localhost:8080/magasin/jeux
 ## Modification du code
 
 Toute modification du code ne peut se faire sur les branches master ou develop. Il faut donc créer une branch personnelle.
+
 Pour cela, on s'assure de se placer tout d'abord sur la branch develop avec la commande git checkout -b 
-avec la commande "git checkout develop", puis, on utilise la commande "git checkout -b {nom de la branch}" pour créer une branche personnelle. Toute modification se fera sur celle-ci.
-Une fois le code commit et push, il fera l'objet d'un pull request vers la branch develop où le code sera review et validé par un autre developpeur avec d'etre merge vers cette dernière.
+avec la commande "*git checkout develop*", puis, on utilise la commande "*git checkout -b {nom de la branch}*" pour créer une branche personnelle. Toute modification se fera sur celle-ci.
+
+Une fois le code commit et push, il fera l'objet d'un pull request vers la branch develop où le code sera review et validé par un autre developpeur avec d'être merge vers cette dernière.
+
 Si le build Jenkins ne comporte aucune erreur sur la branch develop, il sera merge vers la branch master.
