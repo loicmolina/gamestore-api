@@ -1,7 +1,6 @@
 package fr.mim.gamestoreAPI;
 
 import static org.junit.Assert.*;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -16,13 +15,50 @@ import fr.mim.gamestoreAPI.modele.Magasin;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class TestRecherche {
-
+public class TestMagasin {
+	
+	@Test
+	public void testAddJeuDejaPresent() throws Exception {
+		Jeu jeu = new Jeu();
+		jeu.setNom("Tekken 5");
+		Magasin magasin = new Magasin(false);
+		assertTrue(magasin.addJeu(jeu));
+		assertFalse(magasin.addJeu(jeu));
+	}
+	
+	@Test
+	public void testRechercheJeuParId() throws Exception {
+		Jeu jeu = new Jeu();
+		jeu.setNom("Tekken 5");
+		Magasin magasin = new Magasin(false);
+		magasin.addJeu(jeu);
+		assertEquals(magasin.getJeuParId(0).getNom(),jeu.getNom());
+	}
+	
+	@Test
+	public void testContientJeu() throws Exception {
+		Jeu jeu = new Jeu();
+		jeu.setNom("Tekken 5");
+		Magasin magasin = new Magasin(false);
+		magasin.addJeu(jeu);
+		assertTrue(magasin.contains(jeu));
+	}
+	
+	@Test
+	public void testSDeletJeu() throws Exception {
+		Jeu jeu = new Jeu();
+		jeu.setNom("Tekken 5");
+		Magasin magasin = new Magasin(false);
+		magasin.addJeu(jeu);
+		assertTrue(magasin.deleteJeu(0));
+		assertFalse(magasin.contains(jeu));
+	}
+	
 	@Test
 	public void testRechercheSimple() throws Exception {
-		Magasin magasin = new Magasin(false);
 		Jeu jeu = new Jeu();
-		jeu.setNom("Tekken 5");				
+		jeu.setNom("Tekken 5");
+		Magasin magasin = new Magasin(false);
 		magasin.addJeuLocal(jeu);
 		
 		ArrayList<Jeu> resultat = (ArrayList<Jeu>) magasin.rechercheJeux("Tekken");
@@ -33,7 +69,6 @@ public class TestRecherche {
 	
 	@Test
 	public void testRechercheMultiple() throws Exception {
-		Magasin magasin = new Magasin(false);
 		Jeu jeu = new Jeu();
 		jeu.setNom("Super Mario Bros.");			
 		Jeu jeu2 = new Jeu();
@@ -41,6 +76,7 @@ public class TestRecherche {
 		Jeu jeu3 = new Jeu();
 		jeu3.setNom("Overwatch");		
 		
+		Magasin magasin = new Magasin(false);
 		magasin.addJeuLocal(jeu);
 		magasin.addJeuLocal(jeu2);
 		magasin.addJeuLocal(jeu3);
@@ -48,8 +84,7 @@ public class TestRecherche {
 		ArrayList<Jeu> resultat = (ArrayList<Jeu>) magasin.rechercheJeux("Mario");
 		Collections.sort(resultat, new Comparator<Jeu>() {
 	        @Override
-	        public int compare(Jeu jeu1, Jeu jeu2)
-	        {
+	        public int compare(Jeu jeu1, Jeu jeu2) {
 	            return  jeu1.getNom().compareTo(jeu2.getNom());
 	        }
 	    });
@@ -61,9 +96,9 @@ public class TestRecherche {
 	
 	@Test
 	public void testRechercheVide() throws Exception {
-		Magasin magasin = new Magasin(false);
 		Jeu jeu = new Jeu();
-		jeu.setNom("NieR : Automata");				
+		jeu.setNom("NieR : Automata");
+		Magasin magasin = new Magasin(false);
 		magasin.addJeuLocal(jeu);
 		
 		ArrayList<Jeu> resultat = (ArrayList<Jeu>) magasin.rechercheJeux("Metroid");
