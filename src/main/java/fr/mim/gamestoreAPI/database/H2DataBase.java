@@ -82,7 +82,9 @@ public class H2DataBase {
 			} catch (SQLException e) {
 				LOGGER.log(Level.WARNING, e.getMessage());
 			} finally {
-				sql.close();
+				if (sql != null){
+					sql.close();					
+				}
 			}
 		}
 	}
