@@ -26,6 +26,7 @@ public class H2DataBase {
 	public void createDataBase()
 			throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException{
 		try {
+			LOGGER.log(Level.FINE, "Test branch master s");
 			connectionToDatabase();
 			stmt = con.createStatement();
 
