@@ -150,8 +150,9 @@ definitions:
         type: "string"
         example: "Gearbox Software"
       dateSortie:
-        type: "date"
+        type: "string"
         format: "jj/mm/aaaa"
+        example: 31/12/2018
       genre1:
         type: "string"
         example: "FPS"
