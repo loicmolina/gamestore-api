@@ -11,10 +11,6 @@ import org.springframework.context.annotation.ComponentScan;
 public class Application {
 	private ConfigurableApplicationContext run = null;
 
-	public static void main(String[] args) {
-		new Application().runApplication();
-	}
-
 	public void runApplication() {
 		run = SpringApplication.run(Application.class);
 	}
@@ -25,5 +21,9 @@ public class Application {
 
 	public ConfigurableApplicationContext getRun() {
 		return run;
+	}
+	
+	public static void main(String[] args) {
+		new Application().runApplication();
 	}
 }

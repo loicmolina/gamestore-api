@@ -41,8 +41,7 @@ public class JeuControleur {
 		}
 	}
 
-	public static void restart(boolean online)
-			throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
+	public static void restart(boolean online) throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
 		magasin = new Magasin(online);
 		counter.set(0);
 	}
