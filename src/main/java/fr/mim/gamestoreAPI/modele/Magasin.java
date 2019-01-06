@@ -12,11 +12,13 @@ import fr.mim.gamestoreAPI.utils.TextUtils;
 
 public class Magasin {
 	private Set<Jeu> jeux;
+	private boolean online = false;
 	private static H2DataBase database = new H2DataBase();
 
 	public Magasin(boolean recuperationDonnees) throws Exception {
 		jeux = new HashSet<>();
 		if (recuperationDonnees) {
+			online = true;
 			database.createDataBase();
 			jeux = database.getValues();
 		}
@@ -25,7 +27,9 @@ public class Magasin {
 	public boolean addJeu(Jeu jeu) throws Exception {
 		if (getJeuParNom(jeu.getNom()) == null) {
 			addJeuLocal(jeu);
-			addJeuBDD(jeu);
+			if (online) {
+				addJeuBDD(jeu);
+			}
 			return true;
 		}
 		return false;
@@ -35,7 +39,8 @@ public class Magasin {
 		jeux.add(jeu);
 	}
 
-	private void addJeuBDD(Jeu jeu) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+	private void addJeuBDD(Jeu jeu)
+			throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
 		database.insertValue(jeu);
 	}
 
@@ -59,14 +64,18 @@ public class Magasin {
 		Jeu jeu = this.getJeuParId(id);
 		if (jeu != null) {
 			jeux.remove(jeu);
-			database.deleteValue(jeu);
+			if (online) {
+				database.deleteValue(jeu);
+			}
 			return true;
 		}
 		return false;
 	}
 
 	public void deleteJeux() throws Exception {
-		database.deleteValues();
+		if (online) {
+			database.deleteValues();
+		}
 		jeux.clear();
 	}
 

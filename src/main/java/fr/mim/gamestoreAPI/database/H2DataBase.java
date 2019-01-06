@@ -40,7 +40,9 @@ public class H2DataBase {
 		Runtime.getRuntime().addShutdownHook(new Thread(new Runnable() {
 		    public void run() {
 		        try {
-					closeConnectionToDatabase();
+		        	if (CONNECTED){
+						closeConnectionToDatabase();		        		
+		        	}
 				} catch (SQLException e) {
 					LOGGER.log(Level.WARNING, e.getMessage());
 				}
@@ -50,8 +52,6 @@ public class H2DataBase {
 
 	public void connectionToDatabase()
 			throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException {
-		Class<?> classe = Class.forName("org.h2.Driver");
-		classe.newInstance();
 		con = DriverManager.getConnection("jdbc:h2:" + "./database/dataFile", "root", "password");
 	}
 
@@ -96,8 +96,8 @@ public class H2DataBase {
 			throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
 		if (CONNECTED) {
 			try {
-				StringBuilder sql = new StringBuilder("DELETE FROM MAGASIN");
-				stmt.executeUpdate(sql.toString());
+				String sql = "DELETE FROM MAGASIN";
+				stmt.executeUpdate(sql);
 			} catch (Exception e) {
 				LOGGER.log(Level.WARNING, e.getMessage());
 			} 
@@ -108,7 +108,7 @@ public class H2DataBase {
 			throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
 		Set<Jeu> jeux = new HashSet<>();
 		if (CONNECTED) {
-			String sql = new String("SELECT * FROM MAGASIN");
+			String sql = "SELECT * FROM MAGASIN";
 			try (ResultSet rs = stmt.executeQuery(sql);) {		
 				while (rs.next()) {
 					Jeu jeu = new Jeu();
@@ -127,7 +127,7 @@ public class H2DataBase {
 		return jeux;
 	}
 
-	public static boolean isDatabaseUp() throws SQLException {
+	public static boolean isDatabaseUp(){
 		return CONNECTED;
 	}
 }

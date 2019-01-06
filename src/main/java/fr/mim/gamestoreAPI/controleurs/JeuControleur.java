@@ -14,14 +14,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import fr.mim.gamestoreAPI.database.H2DataBase;
 import fr.mim.gamestoreAPI.modele.Jeu;
 import fr.mim.gamestoreAPI.modele.Magasin;
 
 @RestController
-public class JeuControlleur{
+public class JeuControleur{
 	private final static AtomicInteger counter = new AtomicInteger();
-	private final static Logger LOGGER = Logger.getLogger(JeuControlleur.class.getName());
+	private final static Logger LOGGER = Logger.getLogger(JeuControleur.class.getName());
 	
 	private static final String TEMPLATEJEUAJOUTE = "Le jeu %s a été ajouté !";
 	private static final String TEMPLATEJEUDEJAPRESENT = "Un jeu possédant l'id %d existe déjà !";
@@ -42,6 +41,11 @@ public class JeuControlleur{
 		}
 	}
 	
+	public void restart(boolean online) throws Exception{
+		magasin = new Magasin(online);
+		counter.set(0);
+	}
+	
 	@RequestMapping(value = "/jeux", consumes = { "application/json" }, method = RequestMethod.POST)
 	public ResponseEntity<String> ajouterJeu(@RequestBody Jeu jeu) throws Exception {
 		if (jeu.getDateSortie() != null && !jeu.dateCorrect()){
@@ -54,7 +58,7 @@ public class JeuControlleur{
 	}
 
 	@RequestMapping(value = "/jeux/{id}", produces = { "application/json" }, method = RequestMethod.GET)
-	public ResponseEntity<?> getJeuxParNom(@PathVariable("id") long id) {
+	public ResponseEntity<?> getJeuxParId(@PathVariable("id") long id) {
 		Jeu jeuRecherche =  magasin.getJeuParId(id) ;
 		if (jeuRecherche == null){
 			return new ResponseEntity<String>( String.format(TEMPLATEJEUINEXISTANT, id ) , HttpStatus.NOT_FOUND);

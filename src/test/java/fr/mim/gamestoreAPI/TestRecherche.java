@@ -16,7 +16,7 @@ import fr.mim.gamestoreAPI.modele.Magasin;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class RechercheTests {
+public class TestRecherche {
 
 	@Test
 	public void testRechercheSimple() throws Exception {
