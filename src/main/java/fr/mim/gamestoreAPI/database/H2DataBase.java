@@ -2,6 +2,7 @@ package fr.mim.gamestoreAPI.database;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -17,7 +18,7 @@ public class H2DataBase {
 	private static boolean connected;
 	private Statement stmt;
 	private Connection con;
-	
+
 	public H2DataBase(){
 		stmt = null;
 		con = null;
@@ -42,22 +43,22 @@ public class H2DataBase {
 			connected = false;
 			LOGGER.log(Level.WARNING, e.getMessage());
 		}
-		
+
 		Runtime.getRuntime().addShutdownHook(new Thread(new Runnable() {
-		    public void run() {
-		        try {
-		        	if (connected){
+			public void run() {
+				try {
+					if (connected){
 						closeConnectionToDatabase();		        		
-		        	}
+					}
 				} catch (SQLException e) {
 					LOGGER.log(Level.WARNING, e.getMessage());
 				}
-		    }
+			}
 		}));
 	}
 
 	public void connectionToDatabase() throws SQLException{
-		con = DriverManager.getConnection("jdbc:h2:" + "./database/dataFile", "root", "password");
+		con = DriverManager.getConnection("jdbc:h2:" + "./database/dataFile", "root", "");
 	}
 
 	public void closeConnectionToDatabase() throws SQLException {
@@ -67,18 +68,22 @@ public class H2DataBase {
 	public void insertValue(Jeu jeu)
 			throws SQLException{
 		if (connected) {
-			String separateur = "\',\'";
+			PreparedStatement sql = null;
 			try {
-				String sql = "INSERT INTO MAGASIN(id,nom,dateSortie,developpeur,genre1,genre2) values ("
-						+ Long.toString(jeu.getId()) + ",\'" + jeu.getNom() + separateur + jeu.getDateSortie()
-						+ separateur + jeu.getDeveloppeur() + separateur + jeu.getGenre1() + separateur
-						+ jeu.getGenre2() + "\')";
-
-				stmt.executeUpdate(sql);
-
+				sql = con.prepareStatement("INSERT INTO MAGASIN(id,nom,dateSortie,developpeur,genre1,genre2) values (?, ?, ?, ?, ?, ?)");
+				sql.setString(1, Long.toString(jeu.getId()));
+				sql.setString(2, jeu.getNom());
+				sql.setString(3, jeu.getDateSortie());
+				sql.setString(4, jeu.getDeveloppeur());
+				sql.setString(5, jeu.getGenre1());
+				sql.setString(6, jeu.getGenre2());
+				sql.executeUpdate();
+				con.commit();
 			} catch (SQLException e) {
 				LOGGER.log(Level.WARNING, e.getMessage());
-			} 
+			} finally {
+				sql.close();
+			}
 		}
 	}
 
@@ -127,7 +132,7 @@ public class H2DataBase {
 				}
 			} catch (SQLException e) {
 				LOGGER.log(Level.WARNING, e.getMessage());
-			} 
+			}
 		}
 		return jeux;
 	}
