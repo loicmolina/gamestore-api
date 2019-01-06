@@ -26,7 +26,7 @@ Via un IDE (Eclipse par exemple) :
 
 Pour utiliser l'API il est important que le projet soit lancé (via cmd ou IDE).
 Une API répond à des requêtes pouvant être émises par différents éléments. Il est possible d'envoyer des requêtes de type GET via un simple navigateur mais pour des types plus complexe il faut utiliser un environnement de développement d'API tel que [Postman](https://www.getpostman.com/).
-Chaque requête doit commencer avec l'URI suivant : "localhost:8080/magasin/". [Cette documentation](https://app.swaggerhub.com/apis-docs/loicmolina1/gamestore-API/0.1) contient le détail des différentes requêtes traitables par l'API.
+Chaque requête doit commencer avec l'URI suivant : "localhost:8080/magasin/". [Cette documentation](https://app.swaggerhub.com/apis-docs/loicmolina1/Gamestore-api/1.0.0) contient le détail des différentes requêtes traitables par l'API.
 
 ## Modification du code
 
