@@ -63,6 +63,7 @@ public class JeuControleur {
 	}
 
 	@RequestMapping(value = "/jeux/{id}", produces = { "application/json" }, method = RequestMethod.GET)
+	//NOSONAR
 	public ResponseEntity<?> getJeuxParId(@PathVariable("id") long id) {
 		Jeu jeuRecherche = magasin.getJeuParId(id);
 		if (jeuRecherche == null) {

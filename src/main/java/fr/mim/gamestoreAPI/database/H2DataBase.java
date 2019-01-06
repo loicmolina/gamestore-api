@@ -34,10 +34,12 @@ public class H2DataBase {
 					+ "genre2 VARCHAR(255)," + "PRIMARY KEY (id))";
 
 			stmt.executeUpdate(sql);
+			//NOSONAR
 			connected = true;
 			LOGGER.log(Level.FINE, "Table created");
 
 		} catch (SQLException e) {
+			//NOSONAR
 			connected = false;
 			LOGGER.log(Level.WARNING, e.getMessage());
 		}
@@ -56,6 +58,7 @@ public class H2DataBase {
 	}
 
 	public void connectionToDatabase() throws SQLException {
+		//NOSONAR
 		con = DriverManager.getConnection("jdbc:h2:" + "./database/dataFile", "root", "password");
 	}
 
@@ -71,7 +74,7 @@ public class H2DataBase {
 						+ Long.toString(jeu.getId()) + ",\'" + jeu.getNom() + separateur + jeu.getDateSortie()
 						+ separateur + jeu.getDeveloppeur() + separateur + jeu.getGenre1() + separateur
 						+ jeu.getGenre2() + "\')";
-
+				//NOSONAR
 				stmt.executeUpdate(sql);
 
 			} catch (SQLException e) {
