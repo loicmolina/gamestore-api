@@ -24,7 +24,7 @@ via un IDE :
 
 [Documentation Swagger](https://app.swaggerhub.com/apis-docs/loicmolina1/gamestore-API/0.1)
 
-Chaque requête doit commencer avec l'URI suivant : localhost:8080/magasin/jeux
+Chaque requête doit commencer avec l'URI suivant : localhost:8080/magasin/
 
 ## Modification du code
 
