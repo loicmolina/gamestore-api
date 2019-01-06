@@ -5,7 +5,7 @@ import java.text.Normalizer;
 public class TextUtils {
 	private static final String NORMALIZE = "[\\p{InCombiningDiacriticalMarks}]";
 
-	private TextUtils(){	}
+	private TextUtils(){	 }
 	
 	public static String normaliser(String mot){
 		String res = Normalizer.normalize(mot, Normalizer.Form.NFD);
