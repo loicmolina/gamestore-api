@@ -51,11 +51,14 @@ A titre indicatif, si le build Jenkins ne comporte aucune erreur sur la branch d
 ## Intégration Continue
 
 Nous utilisons comme Plateforme d’Intégration Continue Jenkins. On peut y accéder depuis [ce lien](http://vps575474.ovh.net:8080/). La pipeline qui s’occupe de la PIC est configurée dans le fichier JenkinsFile situé à la racine du projet. Cette pipeline intègre des étapes de vérification des tests, d’analyse de code, ainsi que de build et de démarrage sur un docker dédié.
+
 Chaque build peut se lancer manuellement, ou après 5 minutes à la suite de chaque push sur la branche develop de git. Pour chaque build, les étapes de la pipeline sont exécutées et peuvent soit réussir, soit échouer. Un terminal existe également pour prendre connaissance des différents messages envoyés lors du build (les plus important étant les messages d’erreurs).
+
 L’analyse du code est visible depuis [SonarQube](http://51.38.48.230:9000/dashboard?id=fr.mim%3Agamestore-API). Chaque métrique permette ainsi de visualiser la qualité du code analysée en trouvant de possibles bugs ou vulnérabilités, mais aussi en signalant des mauvaises pratiques de codage. On peut également y visualiser si on le souhaite le pourcentage de couverture du code via nos différents tests au sein de notre application.
 
 
 ## Mise à jour documentation Swagger
 
 Si l’API est amenée à être modifiée ou améliorée avec de nouvelles requêtes, il est nécessaire de mettre à jour la documentation de l’API. Pour ce faire, il faut récupérer le fichier swagger.yaml située à la racine du projet et qui contient le code source de cette documentation. Ensuite, on peut copier ce code source sur un éditeur en ligne tel que [Swagger Editor](https://editor.swagger.io/) et ainsi modifier ou ajouter de nouvelles requêtes.
+
 Après avoir push le fichier mis à jour sur git, il faut signaler ce changement à un administrateur du projet pour que ce dernier mette à jour la doc en ligne disponible sur [SwaggerHub](https://app.swaggerhub.com/apis-docs/loicmolina1/Gamestore-api/1.0.0).
