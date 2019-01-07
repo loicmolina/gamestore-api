@@ -1,7 +1,5 @@
 # GAMESTORE API
-Dans le cadre de l'UE Gestion de Production, une api a dû être réalisé 
-afin de mettre en place les différents outils permettant de gérer au 
-mieux un projet.
+
 
 ## Installation
 Pour pouvoir utiliser cette API, il faudra suivre les étapes suivantes :
