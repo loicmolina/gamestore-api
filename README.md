@@ -23,6 +23,8 @@ Via un IDE (Eclipse par exemple) :
 
 * Lancer le fichier Application. java situé dans `src/main/java/fr/mim/gamestoreAPI/`
 
+L'application est maintenant disponible à l'adresse `localhost:8080/magasin/`
+
 ## Documentations
 
 Pour plus d'informations, consultez le dossier `/doc` situé à la racine du projet
