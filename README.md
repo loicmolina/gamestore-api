@@ -25,4 +25,4 @@ Via un IDE (Eclipse par exemple) :
 
 ## Documentations
 
-Pour plus d'informations, consultez le dossier `Doc` situé à la racine du projet
+Pour plus d'informations, consultez le dossier `/doc` situé à la racine du projet
