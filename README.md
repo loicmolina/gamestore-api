@@ -28,3 +28,5 @@ L'application est maintenant disponible à l'adresse `localhost:8080/magasin/`
 ## Documentations
 
 Pour plus d'informations, consultez le dossier `/doc` situé à la racine du projet.
+
+Ceci est une phrase
