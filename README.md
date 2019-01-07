@@ -19,7 +19,7 @@ Via une invite de commande :
 * Executer la commande suivante : mvn spring-boot:run
 
 Via un IDE (Eclipse par exemple) :
-* Importer le projet dans Eclipse (File > Import > Existing Maven Projects) en selectionnant le dossier du projet précédemment cloné :
+* Importer le projet dans Eclipse (File > Import > Existing Maven Projects) en selectionnant le dossier du projet précédemment cloné
 
 * Lancer le fichier Application. java situé dans `src/main/java/fr/mim/gamestoreAPI/`
 
@@ -27,4 +27,4 @@ L'application est maintenant disponible à l'adresse `localhost:8080/magasin/`
 
 ## Documentations
 
-Pour plus d'informations, consultez le dossier `/doc` situé à la racine du projet
+Pour plus d'informations, consultez le dossier `/doc` situé à la racine du projet.
