@@ -22,3 +22,7 @@ Via un IDE (Eclipse par exemple) :
 * Importer le projet dans Eclipse (File > Import > Existing Maven Projects) en selectionnant le dossier du projet précédemment cloné :
 
 * Lancer le fichier Application. java situé dans `src/main/java/fr/mim/gamestoreAPI/`
+
+## Documentations
+
+Pour plus d'informations, consultez le dossier `Doc` situé à la racine du projet
